@@ -1,0 +1,57 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "SlinClipCmdPal/1.0.0": {
+        "dependencies": {
+          "Microsoft.CommandPalette.Extensions": "0.5.250829002"
+        },
+        "runtime": {
+          "SlinClipCmdPal.dll": {}
+        }
+      },
+      "Microsoft.CommandPalette.Extensions/0.5.250829002": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/Microsoft.CommandPalette.Extensions.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.5.2508.29002"
+          },
+          "runtimes/win-arm64/native/Microsoft.CommandPalette.Extensions.pdb": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/Microsoft.CommandPalette.Extensions.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.5.2508.29002"
+          },
+          "runtimes/win-x64/native/Microsoft.CommandPalette.Extensions.pdb": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SlinClipCmdPal/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.CommandPalette.Extensions/0.5.250829002": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PrVPTRnGheDuhP5+8G578jeVSPzN6uvXnzThsREVAXcjkE5PTCC53cIGjaPQJGg0jZM+XKCfenO+0sg0vdADhw==",
+      "path": "microsoft.commandpalette.extensions/0.5.250829002",
+      "hashPath": "microsoft.commandpalette.extensions.0.5.250829002.nupkg.sha512"
+    }
+  }
+}

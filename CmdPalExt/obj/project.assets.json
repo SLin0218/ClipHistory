@@ -1,0 +1,974 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows10.0.22000": {
+      "Microsoft.Data.Sqlite/10.0.13": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Data.Sqlite.Core": "10.0.13",
+          "SQLitePCLRaw.bundle_e_sqlite3": "2.1.13",
+          "SQLitePCLRaw.core": "2.1.13"
+        },
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
+      "Microsoft.Data.Sqlite.Core/10.0.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.1.13"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Win32.SystemEvents/10.0.13": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "Microsoft.Windows.CsWinRT/2.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/WinRT.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/WinRT.Runtime.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Windows.CsWinRT.props": {},
+          "build/Microsoft.Windows.CsWinRT.targets": {}
+        }
+      },
+      "Shmuelie.WinRTServer/2.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SQLitePCLRaw.bundle_e_sqlite3/2.1.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.lib.e_sqlite3": "2.1.13",
+          "SQLitePCLRaw.provider.e_sqlite3": "2.1.13"
+        },
+        "compile": {
+          "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll": {}
+        }
+      },
+      "SQLitePCLRaw.core/2.1.13": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/SQLitePCLRaw.core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SQLitePCLRaw.core.dll": {}
+        }
+      },
+      "SQLitePCLRaw.lib.e_sqlite3/2.1.13": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "build": {
+          "buildTransitive/net8.0/SQLitePCLRaw.lib.e_sqlite3.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/browser-wasm/nativeassets/net8.0/e_sqlite3.a": {
+            "assetType": "native",
+            "rid": "browser-wasm"
+          },
+          "runtimes/linux-arm/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-arm"
+          },
+          "runtimes/linux-arm64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
+          "runtimes/linux-armel/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-armel"
+          },
+          "runtimes/linux-mips64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-mips64"
+          },
+          "runtimes/linux-musl-arm/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-musl-arm"
+          },
+          "runtimes/linux-musl-arm64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-musl-arm64"
+          },
+          "runtimes/linux-musl-riscv64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-musl-riscv64"
+          },
+          "runtimes/linux-musl-s390x/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-musl-s390x"
+          },
+          "runtimes/linux-musl-x64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-musl-x64"
+          },
+          "runtimes/linux-ppc64le/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-ppc64le"
+          },
+          "runtimes/linux-riscv64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-riscv64"
+          },
+          "runtimes/linux-s390x/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-s390x"
+          },
+          "runtimes/linux-x64/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x86/native/libe_sqlite3.so": {
+            "assetType": "native",
+            "rid": "linux-x86"
+          },
+          "runtimes/maccatalyst-arm64/native/libe_sqlite3.dylib": {
+            "assetType": "native",
+            "rid": "maccatalyst-arm64"
+          },
+          "runtimes/maccatalyst-x64/native/libe_sqlite3.dylib": {
+            "assetType": "native",
+            "rid": "maccatalyst-x64"
+          },
+          "runtimes/osx-arm64/native/libe_sqlite3.dylib": {
+            "assetType": "native",
+            "rid": "osx-arm64"
+          },
+          "runtimes/osx-x64/native/libe_sqlite3.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-arm64/native/e_sqlite3.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/e_sqlite3.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/e_sqlite3.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "SQLitePCLRaw.provider.e_sqlite3/2.1.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.1.13"
+        },
+        "compile": {
+          "lib/net6.0-windows7.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
+        }
+      },
+      "System.Drawing.Common/10.0.13": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "10.0.13"
+        },
+        "compile": {
+          "lib/net8.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/net8.0/System.Private.Windows.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net8.0/System.Private.Windows.GdiPlus.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/net8.0/System.Private.Windows.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net8.0/System.Private.Windows.GdiPlus.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "System.Memory/4.5.3": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      }
+    },
+    "net8.0-windows10.0.22000/win-x64": {
+      "Microsoft.Data.Sqlite/10.0.13": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Data.Sqlite.Core": "10.0.13",
+          "SQLitePCLRaw.bundle_e_sqlite3": "2.1.13",
+          "SQLitePCLRaw.core": "2.1.13"
+        },
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
+      "Microsoft.Data.Sqlite.Core/10.0.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.1.13"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Data.Sqlite.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Win32.SystemEvents/10.0.13": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "Microsoft.Windows.CsWinRT/2.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/WinRT.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/WinRT.Runtime.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Windows.CsWinRT.props": {},
+          "build/Microsoft.Windows.CsWinRT.targets": {}
+        }
+      },
+      "Shmuelie.WinRTServer/2.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SQLitePCLRaw.bundle_e_sqlite3/2.1.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.lib.e_sqlite3": "2.1.13",
+          "SQLitePCLRaw.provider.e_sqlite3": "2.1.13"
+        },
+        "compile": {
+          "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll": {}
+        }
+      },
+      "SQLitePCLRaw.core/2.1.13": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/SQLitePCLRaw.core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SQLitePCLRaw.core.dll": {}
+        }
+      },
+      "SQLitePCLRaw.lib.e_sqlite3/2.1.13": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "native": {
+          "runtimes/win-x64/native/e_sqlite3.dll": {}
+        },
+        "build": {
+          "buildTransitive/net8.0/SQLitePCLRaw.lib.e_sqlite3.targets": {}
+        }
+      },
+      "SQLitePCLRaw.provider.e_sqlite3/2.1.13": {
+        "type": "package",
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.1.13"
+        },
+        "compile": {
+          "lib/net6.0-windows7.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
+        }
+      },
+      "System.Drawing.Common/10.0.13": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "10.0.13"
+        },
+        "compile": {
+          "lib/net8.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/net8.0/System.Private.Windows.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net8.0/System.Private.Windows.GdiPlus.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          },
+          "lib/net8.0/System.Private.Windows.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net8.0/System.Private.Windows.GdiPlus.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "System.Memory/4.5.3": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.Data.Sqlite/10.0.13": {
+      "sha512": "w37nz3WFmDtRfXxWEwIXX2OgqDRiwhD1JGbFwfpFCF8GkCrV/yO6Y2JF5058J2RGoI2sCcdn02wrk0yEcekWcw==",
+      "type": "package",
+      "path": "microsoft.data.sqlite/10.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "lib/netstandard2.0/_._",
+        "microsoft.data.sqlite.10.0.13.nupkg.sha512",
+        "microsoft.data.sqlite.nuspec"
+      ]
+    },
+    "Microsoft.Data.Sqlite.Core/10.0.13": {
+      "sha512": "Gge8XsSCOwcbkbdmt2UDAe6kIv9Q0vA6yb3wsTStjjexaMFLTWfc/1gH4kbhJ+zWiXRTRA4lG2sOQNVfir204w==",
+      "type": "package",
+      "path": "microsoft.data.sqlite.core/10.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "lib/net8.0/Microsoft.Data.Sqlite.dll",
+        "lib/net8.0/Microsoft.Data.Sqlite.xml",
+        "lib/netstandard2.0/Microsoft.Data.Sqlite.dll",
+        "lib/netstandard2.0/Microsoft.Data.Sqlite.xml",
+        "microsoft.data.sqlite.core.10.0.13.nupkg.sha512",
+        "microsoft.data.sqlite.core.nuspec"
+      ]
+    },
+    "Microsoft.Win32.SystemEvents/10.0.13": {
+      "sha512": "rtd1rRf5uiusn/r+hNsODiCjvA+nErw+1EQb2uCv0EedLi2GEYWgLK0V31SXzcZ2b0D7VeoOrHJ0WCQqfbO67Q==",
+      "type": "package",
+      "path": "microsoft.win32.systemevents/10.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
+        "lib/net10.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net10.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net462/Microsoft.Win32.SystemEvents.dll",
+        "lib/net462/Microsoft.Win32.SystemEvents.xml",
+        "lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net8.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net9.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net9.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "microsoft.win32.systemevents.10.0.13.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "runtimes/win/lib/net10.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net10.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.xml",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Windows.CsWinRT/2.1.1": {
+      "sha512": "q2CixHYFojIC1As4qUcK+yRIdDsN9UVT96TsI+3wBPab+zDKIv1PqrFOfJgB4Jkpn6iPs7nbLFRH3abVFzBPGA==",
+      "type": "package",
+      "path": "microsoft.windows.cswinrt/2.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NOTICE.txt",
+        "analyzers/dotnet/cs/WinRT.SourceGenerator.dll",
+        "analyzers/dotnet/cs/de-DE/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/es-ES/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/fr-FR/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/it-IT/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/ja-JP/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/ko-KR/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/pt-BR/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/ru-RU/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/zh-CN/CsWinRTDiagnosticStrings.resx",
+        "analyzers/dotnet/cs/zh-TW/CsWinRTDiagnosticStrings.resx",
+        "build/Microsoft.Windows.CsWinRT.Authoring.Transitive.targets",
+        "build/Microsoft.Windows.CsWinRT.Authoring.targets",
+        "build/Microsoft.Windows.CsWinRT.Embedded.targets",
+        "build/Microsoft.Windows.CsWinRT.IIDOptimizer.targets",
+        "build/Microsoft.Windows.CsWinRT.props",
+        "build/Microsoft.Windows.CsWinRT.targets",
+        "build/tools/IIDOptimizer/IIDOptimizer.deps.json",
+        "build/tools/IIDOptimizer/IIDOptimizer.dll",
+        "build/tools/IIDOptimizer/IIDOptimizer.exe",
+        "build/tools/IIDOptimizer/IIDOptimizer.runtimeconfig.json",
+        "build/tools/IIDOptimizer/Mono.Cecil.Mdb.dll",
+        "build/tools/IIDOptimizer/Mono.Cecil.Pdb.dll",
+        "build/tools/IIDOptimizer/Mono.Cecil.Rocks.dll",
+        "build/tools/IIDOptimizer/Mono.Cecil.dll",
+        "build/tools/IIDOptimizer/System.CommandLine.dll",
+        "cswinrt.exe",
+        "embedded/any/ActivationFactory.cs",
+        "embedded/any/AgileReference.cs",
+        "embedded/any/Attributes.cs",
+        "embedded/any/CastExtensions.cs",
+        "embedded/any/ComWrappersSupport.cs",
+        "embedded/any/Context.cs",
+        "embedded/any/DataErrorsChangedEventArgs.cs",
+        "embedded/any/DelegateExtensions.cs",
+        "embedded/any/DerivedComposed.cs",
+        "embedded/any/EventHandler.cs",
+        "embedded/any/EventHandlerEventSource.cs",
+        "embedded/any/EventHandlerEventSource{T}.cs",
+        "embedded/any/EventRegistrationToken.cs",
+        "embedded/any/EventRegistrationTokenTable{T}.cs",
+        "embedded/any/EventSourceCache.cs",
+        "embedded/any/EventSourceState{TDelegate}.cs",
+        "embedded/any/EventSource{TDelegate}.cs",
+        "embedded/any/ExceptionHelpers.Microsoft.cs",
+        "embedded/any/ExceptionHelpers.cs",
+        "embedded/any/FeatureSwitches.cs",
+        "embedded/any/FundamentalMarshalers.cs",
+        "embedded/any/Geometry.cs",
+        "embedded/any/GuidGenerator.cs",
+        "embedded/any/IActivationFactory.cs",
+        "embedded/any/IContextCallback.cs",
+        "embedded/any/IDelegateVftbl.cs",
+        "embedded/any/IID.g.cs",
+        "embedded/any/IInspectable.cs",
+        "embedded/any/IReferenceTracker.cs",
+        "embedded/any/IStringable.cs",
+        "embedded/any/IUnknownVftbl.cs",
+        "embedded/any/KeyValuePair.cs",
+        "embedded/any/Marshalers.cs",
+        "embedded/any/Module.cs",
+        "embedded/any/MonoSupport.cs",
+        "embedded/any/NotifyCollectionChangedAction.cs",
+        "embedded/any/NotifyCollectionChangedEventArgs.cs",
+        "embedded/any/NotifyCollectionChangedEventHandler.cs",
+        "embedded/any/Nullable.cs",
+        "embedded/any/Numerics.cs",
+        "embedded/any/ObjectReference.cs",
+        "embedded/any/Platform.cs",
+        "embedded/any/Projections.CustomTypeMappings.EventHandler.cs",
+        "embedded/any/Projections.CustomTypeMappings.g.cs",
+        "embedded/any/Projections.cs",
+        "embedded/any/PropertyChangedEventArgs.cs",
+        "embedded/any/PropertyChangedEventHandler.cs",
+        "embedded/any/StandardDelegates.cs",
+        "embedded/any/SystemTypes.cs",
+        "embedded/any/Type.ArrayMarshalling.cs",
+        "embedded/any/Type.cs",
+        "embedded/any/TypeExtensions.cs",
+        "embedded/any/TypeNameSupport.cs",
+        "embedded/any/Uri.cs",
+        "embedded/any/WinRTRuntimeErrorStrings.Designer.cs",
+        "embedded/any/WuxMuxProjectedTypeAttribute.cs",
+        "embedded/net6.0/AttributeMessages.net5.cs",
+        "embedded/net6.0/Bindable.net5.cs",
+        "embedded/net6.0/CollectionHybrid.net5.cs",
+        "embedded/net6.0/ComWrappersSupport.net5.cs",
+        "embedded/net6.0/ExceptionErrorInfo.net5.cs",
+        "embedded/net6.0/ExceptionHelpers.Windows.net5.cs",
+        "embedded/net6.0/GenericDelegateHelper.net5.cs",
+        "embedded/net6.0/IAgileReference.net5.cs",
+        "embedded/net6.0/ICommand.net5.cs",
+        "embedded/net6.0/ICustomPropertyProvider.net5.cs",
+        "embedded/net6.0/IDictionary.net5.cs",
+        "embedded/net6.0/IDisposable.net5.cs",
+        "embedded/net6.0/IEnumerable.net5.cs",
+        "embedded/net6.0/IInspectable.net5.cs",
+        "embedded/net6.0/IList.net5.cs",
+        "embedded/net6.0/IMarshal.net5.cs",
+        "embedded/net6.0/INotifyCollectionChanged.net5.cs",
+        "embedded/net6.0/INotifyDataErrorInfo.net5.cs",
+        "embedded/net6.0/INotifyPropertyChanged.net5.cs",
+        "embedded/net6.0/IPropertyValue.net5.cs",
+        "embedded/net6.0/IReadOnlyDictionary.net5.cs",
+        "embedded/net6.0/IReadOnlyList.net5.cs",
+        "embedded/net6.0/IReferenceArray.net5.cs",
+        "embedded/net6.0/IServiceProvider.net5.cs",
+        "embedded/net6.0/IWeakReferenceSource.net5.cs",
+        "embedded/net6.0/IWinRTObject.net5.cs",
+        "embedded/net6.0/SingleInterfaceOptimizedObject.net5.cs",
+        "embedded/netstandard2.0/Bindable.netstandard2.0.cs",
+        "embedded/netstandard2.0/ComWrappersSupport.netstandard2.0.cs",
+        "embedded/netstandard2.0/ExceptionErrorInfo.netstandard2.0.cs",
+        "embedded/netstandard2.0/IAgileReference.netstandard2.0.cs",
+        "embedded/netstandard2.0/ICommand.netstandard2.0.cs",
+        "embedded/netstandard2.0/ICustomPropertyProvider.netstandard2.0.cs",
+        "embedded/netstandard2.0/IDictionary.netstandard2.0.cs",
+        "embedded/netstandard2.0/IDisposable.netstandard2.0.cs",
+        "embedded/netstandard2.0/IEnumerable.netstandard2.0.cs",
+        "embedded/netstandard2.0/IList.netstandard2.0.cs",
+        "embedded/netstandard2.0/IMarshal.netstandard2.0.cs",
+        "embedded/netstandard2.0/INotifyCollectionChanged.netstandard2.0.cs",
+        "embedded/netstandard2.0/INotifyDataErrorInfo.netstandard2.0.cs",
+        "embedded/netstandard2.0/INotifyPropertyChanged.netstandard2.0.cs",
+        "embedded/netstandard2.0/IPropertyValue.netstandard2.0.cs",
+        "embedded/netstandard2.0/IReadOnlyDictionary.netstandard2.0.cs",
+        "embedded/netstandard2.0/IReadOnlyList.netstandard2.0.cs",
+        "embedded/netstandard2.0/IReferenceArray.netstandard2.0.cs",
+        "embedded/netstandard2.0/IServiceProvider.netstandard2.0.cs",
+        "embedded/netstandard2.0/IWeakReferenceSource.netstandard2.0.cs",
+        "embedded/netstandard2.0/WeakReference.netstandard2.0.cs",
+        "hosting/arm64/native/WinRT.Host.dll",
+        "hosting/arm64/native/de-DE/WinRT.Host.dll.mui",
+        "hosting/arm64/native/en-US/WinRT.Host.dll.mui",
+        "hosting/arm64/native/es-ES/WinRT.Host.dll.mui",
+        "hosting/arm64/native/fr-FR/WinRT.Host.dll.mui",
+        "hosting/arm64/native/it-IT/WinRT.Host.dll.mui",
+        "hosting/arm64/native/ja-JP/WinRT.Host.dll.mui",
+        "hosting/arm64/native/ko-KR/WinRT.Host.dll.mui",
+        "hosting/arm64/native/pt-BR/WinRT.Host.dll.mui",
+        "hosting/arm64/native/ru-RU/WinRT.Host.dll.mui",
+        "hosting/arm64/native/zh-CN/WinRT.Host.dll.mui",
+        "hosting/arm64/native/zh-TW/WinRT.Host.dll.mui",
+        "hosting/x64/native/WinRT.Host.dll",
+        "hosting/x64/native/de-DE/WinRT.Host.dll.mui",
+        "hosting/x64/native/en-US/WinRT.Host.dll.mui",
+        "hosting/x64/native/es-ES/WinRT.Host.dll.mui",
+        "hosting/x64/native/fr-FR/WinRT.Host.dll.mui",
+        "hosting/x64/native/it-IT/WinRT.Host.dll.mui",
+        "hosting/x64/native/ja-JP/WinRT.Host.dll.mui",
+        "hosting/x64/native/ko-KR/WinRT.Host.dll.mui",
+        "hosting/x64/native/pt-BR/WinRT.Host.dll.mui",
+        "hosting/x64/native/ru-RU/WinRT.Host.dll.mui",
+        "hosting/x64/native/zh-CN/WinRT.Host.dll.mui",
+        "hosting/x64/native/zh-TW/WinRT.Host.dll.mui",
+        "hosting/x86/native/WinRT.Host.dll",
+        "hosting/x86/native/de-DE/WinRT.Host.dll.mui",
+        "hosting/x86/native/en-US/WinRT.Host.dll.mui",
+        "hosting/x86/native/es-ES/WinRT.Host.dll.mui",
+        "hosting/x86/native/fr-FR/WinRT.Host.dll.mui",
+        "hosting/x86/native/it-IT/WinRT.Host.dll.mui",
+        "hosting/x86/native/ja-JP/WinRT.Host.dll.mui",
+        "hosting/x86/native/ko-KR/WinRT.Host.dll.mui",
+        "hosting/x86/native/pt-BR/WinRT.Host.dll.mui",
+        "hosting/x86/native/ru-RU/WinRT.Host.dll.mui",
+        "hosting/x86/native/zh-CN/WinRT.Host.dll.mui",
+        "hosting/x86/native/zh-TW/WinRT.Host.dll.mui",
+        "lib/net6.0/WinRT.Host.Shim.dll",
+        "lib/net6.0/WinRT.Runtime.dll",
+        "lib/net6.0/de-DE/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/es-ES/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/fr-FR/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/it-IT/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/ja-JP/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/ko-KR/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/pt-BR/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/ru-RU/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/zh-CN/WinRTRuntimeErrorStrings.resx",
+        "lib/net6.0/zh-TW/WinRTRuntimeErrorStrings.resx",
+        "lib/net8.0/WinRT.Runtime.dll",
+        "metadata/WinRT.Interop.winmd",
+        "microsoft.windows.cswinrt.2.1.1.nupkg.sha512",
+        "microsoft.windows.cswinrt.nuspec",
+        "readme.txt"
+      ]
+    },
+    "Shmuelie.WinRTServer/2.2.1": {
+      "sha512": "Nt+t3cMga8YWXToaTw//CGjO9mTQORc+qSKyrVXZAhnyUWiZ7flhFBTWI1igp+2o2PYl5CCNHYfz9JI4F25GPA==",
+      "type": "package",
+      "path": "shmuelie.winrtserver/2.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "Shmuelie.WinRTServer-128.png",
+        "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll",
+        "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.xml",
+        "shmuelie.winrtserver.2.2.1.nupkg.sha512",
+        "shmuelie.winrtserver.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.bundle_e_sqlite3/2.1.13": {
+      "sha512": "NlDixlC7uHmo+ojXRgkNvN0tQtVGpLDZ3x2OpgNj+G07VHh5cXSszFDrAiC4BpUiPwkcaeuQkMV9WQ123xVtmQ==",
+      "type": "package",
+      "path": "sqlitepclraw.bundle_e_sqlite3/2.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net6.0-android31.0/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net6.0-android31.0/SQLitePCLRaw.batteries_v2.xml",
+        "lib/net6.0-ios14.0/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net6.0-ios14.2/SQLitePCLRaw.batteries_v2.dll",
+        "lib/net6.0-tvos10.0/SQLitePCLRaw.batteries_v2.dll",
+        "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll",
+        "sqlitepclraw.bundle_e_sqlite3.2.1.13.nupkg.sha512",
+        "sqlitepclraw.bundle_e_sqlite3.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.core/2.1.13": {
+      "sha512": "2joofoinuHBFs0nMX3nKuXgxpXryRkCOdM2Ua6HBqQLLy6IW+5f28ZI+HAvMyF8vG7XfNz/lwfBfE6V4juru8Q==",
+      "type": "package",
+      "path": "sqlitepclraw.core/2.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/SQLitePCLRaw.core.dll",
+        "sqlitepclraw.core.2.1.13.nupkg.sha512",
+        "sqlitepclraw.core.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.lib.e_sqlite3/2.1.13": {
+      "sha512": "D2UAuiGxFYBqeRXjjjGgvJ5UQifzn6wefmSqeKU7XcNGKLbJRP6X7kcPZ6opOBJGdCIlgbSxTvDpBbLvsN594A==",
+      "type": "package",
+      "path": "sqlitepclraw.lib.e_sqlite3/2.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "buildTransitive/net461/SQLitePCLRaw.lib.e_sqlite3.targets",
+        "buildTransitive/net6.0/SQLitePCLRaw.lib.e_sqlite3.targets",
+        "buildTransitive/net7.0/SQLitePCLRaw.lib.e_sqlite3.targets",
+        "buildTransitive/net8.0/SQLitePCLRaw.lib.e_sqlite3.targets",
+        "buildTransitive/net9.0/SQLitePCLRaw.lib.e_sqlite3.targets",
+        "lib/net461/_._",
+        "lib/netstandard2.0/_._",
+        "runtimes/browser-wasm/nativeassets/net6.0/e_sqlite3.a",
+        "runtimes/browser-wasm/nativeassets/net7.0/e_sqlite3.a",
+        "runtimes/browser-wasm/nativeassets/net8.0/e_sqlite3.a",
+        "runtimes/browser-wasm/nativeassets/net9.0/e_sqlite3.a",
+        "runtimes/linux-arm/native/libe_sqlite3.so",
+        "runtimes/linux-arm64/native/libe_sqlite3.so",
+        "runtimes/linux-armel/native/libe_sqlite3.so",
+        "runtimes/linux-mips64/native/libe_sqlite3.so",
+        "runtimes/linux-musl-arm/native/libe_sqlite3.so",
+        "runtimes/linux-musl-arm64/native/libe_sqlite3.so",
+        "runtimes/linux-musl-riscv64/native/libe_sqlite3.so",
+        "runtimes/linux-musl-s390x/native/libe_sqlite3.so",
+        "runtimes/linux-musl-x64/native/libe_sqlite3.so",
+        "runtimes/linux-ppc64le/native/libe_sqlite3.so",
+        "runtimes/linux-riscv64/native/libe_sqlite3.so",
+        "runtimes/linux-s390x/native/libe_sqlite3.so",
+        "runtimes/linux-x64/native/libe_sqlite3.so",
+        "runtimes/linux-x86/native/libe_sqlite3.so",
+        "runtimes/maccatalyst-arm64/native/libe_sqlite3.dylib",
+        "runtimes/maccatalyst-x64/native/libe_sqlite3.dylib",
+        "runtimes/osx-arm64/native/libe_sqlite3.dylib",
+        "runtimes/osx-x64/native/libe_sqlite3.dylib",
+        "runtimes/win-arm64/native/e_sqlite3.dll",
+        "runtimes/win-x64/native/e_sqlite3.dll",
+        "runtimes/win-x86/native/e_sqlite3.dll",
+        "sqlitepclraw.lib.e_sqlite3.2.1.13.nupkg.sha512",
+        "sqlitepclraw.lib.e_sqlite3.nuspec"
+      ]
+    },
+    "SQLitePCLRaw.provider.e_sqlite3/2.1.13": {
+      "sha512": "ZU60dSqoSNRe49KcQDUmOVgdRtjITOssVXFtiISs+zJXDI4D2Sndwpn2NOtzDQNPu0ZAvpoLPQ+GLKv6iEZn8Q==",
+      "type": "package",
+      "path": "sqlitepclraw.provider.e_sqlite3/2.1.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0-windows7.0/SQLitePCLRaw.provider.e_sqlite3.dll",
+        "lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll",
+        "lib/netstandard2.0/SQLitePCLRaw.provider.e_sqlite3.dll",
+        "sqlitepclraw.provider.e_sqlite3.2.1.13.nupkg.sha512",
+        "sqlitepclraw.provider.e_sqlite3.nuspec"
+      ]
+    },
+    "System.Drawing.Common/10.0.13": {
+      "sha512": "s8JRuC+ec1djwT471SbZRXWCBFXCKkNNGILWD/OCmIcdL0KP0w4arMjyEZzNUuKxolperKtlxHhS+34rA4N3XA==",
+      "type": "package",
+      "path": "system.drawing.common/10.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Drawing.Common.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net10.0/System.Drawing.Common.dll",
+        "lib/net10.0/System.Drawing.Common.pdb",
+        "lib/net10.0/System.Drawing.Common.xml",
+        "lib/net10.0/System.Private.Windows.Core.dll",
+        "lib/net10.0/System.Private.Windows.Core.xml",
+        "lib/net10.0/System.Private.Windows.GdiPlus.dll",
+        "lib/net10.0/System.Private.Windows.GdiPlus.xml",
+        "lib/net462/System.Drawing.Common.dll",
+        "lib/net462/System.Drawing.Common.pdb",
+        "lib/net462/System.Drawing.Common.xml",
+        "lib/net8.0/System.Drawing.Common.dll",
+        "lib/net8.0/System.Drawing.Common.pdb",
+        "lib/net8.0/System.Drawing.Common.xml",
+        "lib/net8.0/System.Private.Windows.Core.dll",
+        "lib/net8.0/System.Private.Windows.Core.xml",
+        "lib/net8.0/System.Private.Windows.GdiPlus.dll",
+        "lib/net8.0/System.Private.Windows.GdiPlus.xml",
+        "lib/net9.0/System.Drawing.Common.dll",
+        "lib/net9.0/System.Drawing.Common.pdb",
+        "lib/net9.0/System.Drawing.Common.xml",
+        "lib/net9.0/System.Private.Windows.Core.dll",
+        "lib/net9.0/System.Private.Windows.Core.xml",
+        "lib/net9.0/System.Private.Windows.GdiPlus.dll",
+        "lib/net9.0/System.Private.Windows.GdiPlus.xml",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.pdb",
+        "lib/netstandard2.0/System.Drawing.Common.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "system.drawing.common.10.0.13.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Memory/4.5.3": {
+      "sha512": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "type": "package",
+      "path": "system.memory/4.5.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.3.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows10.0.22000": [
+      "Microsoft.Data.Sqlite >= 10.0.13",
+      "Microsoft.Windows.CsWinRT >= 2.1.1",
+      "Shmuelie.WinRTServer >= 2.2.1",
+      "System.Drawing.Common >= 10.0.13"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\SlinClipCmdPal.csproj",
+      "projectName": "SlinClipCmdPal",
+      "projectPath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\SlinClipCmdPal.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows10.0.22000.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows10.0.22000": {
+          "targetAlias": "net8.0-windows10.0.22000.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0-windows10.0.22000": {
+        "targetAlias": "net8.0-windows10.0.22000.0",
+        "dependencies": {
+          "Microsoft.Data.Sqlite": {
+            "target": "Package",
+            "version": "[10.0.13, )"
+          },
+          "Microsoft.Windows.CsWinRT": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
+          "Shmuelie.WinRTServer": {
+            "target": "Package",
+            "version": "[2.2.1, )"
+          },
+          "System.Drawing.Common": {
+            "target": "Package",
+            "version": "[10.0.13, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.Windows.SDK.NET.Ref",
+            "version": "[10.0.22000.56, 10.0.22000.56]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.Windows.SDK.NET.Ref": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Users\\USER\\.dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
+      }
+    }
+  }
+}

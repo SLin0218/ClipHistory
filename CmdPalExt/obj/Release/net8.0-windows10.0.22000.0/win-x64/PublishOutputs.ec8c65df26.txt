@@ -1,0 +1,17 @@
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.exe
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.deps.json
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.runtimeconfig.json
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.pdb
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\Microsoft.Windows.SDK.NET.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\WinRT.Runtime.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\Microsoft.Data.Sqlite.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\Microsoft.Win32.SystemEvents.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\Shmuelie.WinRTServer.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SQLitePCLRaw.batteries_v2.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SQLitePCLRaw.core.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\System.Drawing.Common.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\System.Private.Windows.Core.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\System.Private.Windows.GdiPlus.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\e_sqlite3.dll

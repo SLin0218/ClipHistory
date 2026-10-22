@@ -1,0 +1,8 @@
+-target net8.0
+-input C:\Users\USER\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.22000.56\winmd
+-input "C:\Users\USER\scoop\apps\powertoys\current\WinUI3Apps\Microsoft.CommandPalette.Extensions.winmd"
+-output "C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000.0\win-x64\Generated Files\CsWinRT"
+
+-exclude Windows
+-exclude Microsoft
+-include Microsoft.CommandPalette.Extensions

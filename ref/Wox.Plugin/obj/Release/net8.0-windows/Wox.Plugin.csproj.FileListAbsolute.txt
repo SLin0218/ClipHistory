@@ -1,0 +1,11 @@
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\bin\Release\net8.0-windows\Wox.Plugin.deps.json
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\bin\Release\net8.0-windows\Wox.Plugin.dll
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\bin\Release\net8.0-windows\Wox.Plugin.pdb
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\Wox.Plugin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\Wox.Plugin.AssemblyInfoInputs.cache
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\Wox.Plugin.AssemblyInfo.cs
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\Wox.Plugin.csproj.CoreCompileInputs.cache
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\Wox.Plugin.dll
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\refint\Wox.Plugin.dll
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\Wox.Plugin.pdb
+C:\Users\USER\Workspace\Slin-Clip\ref\Wox.Plugin\obj\Release\net8.0-windows\ref\Wox.Plugin.dll
