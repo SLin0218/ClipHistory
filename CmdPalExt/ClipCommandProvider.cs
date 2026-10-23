@@ -1,26 +1,30 @@
 using System;
 using Windows.Foundation;
 using Microsoft.CommandPalette.Extensions;
+using SlinClip.Services;
 
 namespace SlinClipCmdPal
 {
-    public sealed class ClipCommandProvider : ICommandProvider
+    public sealed class ClipCommandProvider : ICommandProvider, IDisposable
     {
-        public string Id => "SlinClip.CommandProvider";
-        public string DisplayName => "Slin-Clip 剪切板历史";
-        public IIconInfo Icon => new IconInfo("\uE8C8");
-        public ICommandSettings? Settings => null;
+        public string Id => "ClipHistory.CommandProvider";
+        public string DisplayName => I18n.T("ClipHistory 剪切板历史", "ClipHistory Clipboard History");
+        public IIconInfo Icon => IconInfo.FromAsset("icon.svg");
+        public ICommandSettings? Settings { get; }
         public bool Frozen => false;
 
         private readonly ClipHistoryPage _historyPage;
+        private readonly ClipSettingsContentPage _settingsPage;
         private IExtensionHost? _host;
 
         public event TypedEventHandler<object, IItemsChangedEventArgs>? ItemsChanged;
 
-        public ClipCommandProvider(ClipHistoryPage historyPage)
+        public ClipCommandProvider(ClipHistoryPage historyPage, ClipSettingsContentPage settingsPage)
         {
             _historyPage = historyPage;
-            ExtLog.Info("ClipCommandProvider initialized.");
+            _settingsPage = settingsPage;
+            Settings = new CommandSettings(_settingsPage);
+            ExtLog.Info("ClipCommandProvider initialized with official ICommandSettings.");
         }
 
         public void InitializeWithHost(IExtensionHost host)
@@ -32,17 +36,11 @@ namespace SlinClipCmdPal
         public ICommandItem[] TopLevelCommands()
         {
             ExtLog.Info("ClipCommandProvider.TopLevelCommands called.");
-            var topCmd = new ListItem
+            var topCmd = new CommandItem(_historyPage)
             {
-                Title = "剪切板历史 (Slin-Clip)",
-                Subtitle = "查看并检索历史复制的文本与图片，支持置顶与一键粘贴",
-                Icon = new IconInfo("\uE8C8"),
-                Command = _historyPage,
-                Details = new Details
-                {
-                    Title = "Slin-Clip 剪切板扩展",
-                    Body = "### 欢迎使用 Slin-Clip\n\n* **超快检索**: 基于 SQLite WAL 高速存储与内存缓存\n* **图文兼备**: 自动生成图片缩略图，文本全量检索\n* **快捷粘贴**: 回车即选即粘，自动还原剪切板"
-                }
+                Title = I18n.T("剪切板历史 (ClipHistory)", "Clipboard History (ClipHistory)"),
+                Subtitle = I18n.T("查看并检索历史复制的文本与图片，支持置顶与快捷管理", "View and search copied text and images with pin and shortcut management"),
+                Icon = IconInfo.FromAsset("icon.svg")
             };
 
             return new ICommandItem[] { topCmd };
@@ -53,10 +51,27 @@ namespace SlinClipCmdPal
         public ICommand? GetCommand(string id)
         {
             ExtLog.Info($"ClipCommandProvider.GetCommand called with id: {id}");
-            if (id == _historyPage.Id)
+            if (string.Equals(id, _historyPage.Id, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "ClipHistoryPage", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "SlinClipHistoryPage", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "ch", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "sc", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "clip", StringComparison.OrdinalIgnoreCase))
             {
                 return _historyPage;
             }
+
+            if (string.Equals(id, _settingsPage.Id, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "ClipHistorySettingsPage", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "SlinClipSettingsPage", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "ch-set", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "sc-settings", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "sc-set", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(id, "scs", StringComparison.OrdinalIgnoreCase))
+            {
+                return _settingsPage;
+            }
+
             return null;
         }
 

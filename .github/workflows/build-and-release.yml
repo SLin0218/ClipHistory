@@ -1,0 +1,50 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build and Package
+        shell: pwsh
+        run: |
+          .\build.ps1
+
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          if (-not $version) { $version = "1.0.0" }
+
+          # Package CmdPal Extension
+          $cmdpalDir = "CmdPalExt\publish"
+          $cmdpalZip = "ClipHistory-CmdPal-$version.zip"
+          Compress-Archive -Path "$cmdpalDir\*" -DestinationPath $cmdpalZip -Force
+
+          # Generate SHA256 Checksum
+          $cmdpalHash = (Get-FileHash -Path $cmdpalZip -Algorithm SHA256).Hash
+          "$cmdpalHash  $cmdpalZip" | Out-File -FilePath "SHA256SUMS.txt" -Encoding utf8
+
+          Write-Host "CmdPal Zip: $cmdpalZip (SHA256: $cmdpalHash)"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ClipHistory-CmdPal-*.zip
+            SHA256SUMS.txt
+          generate_release_notes: true

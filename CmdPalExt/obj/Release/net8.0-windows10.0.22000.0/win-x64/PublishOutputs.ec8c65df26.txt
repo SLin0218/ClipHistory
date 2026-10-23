@@ -1,8 +1,8 @@
-C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.exe
-C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.dll
-C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.deps.json
-C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.runtimeconfig.json
-C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\SlinClipCmdPal.pdb
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\ClipHistoryCmdPal.exe
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\ClipHistoryCmdPal.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\ClipHistoryCmdPal.deps.json
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\ClipHistoryCmdPal.runtimeconfig.json
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\ClipHistoryCmdPal.pdb
 C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\Microsoft.Windows.SDK.NET.dll
 C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\WinRT.Runtime.dll
 C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\publish\Microsoft.Data.Sqlite.dll

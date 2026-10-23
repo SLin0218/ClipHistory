@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6rizq9XQuFo=",
+  "dgSpecHash": "k5z+hLesPhs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\SlinClipCmdPal.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\ClipHistoryCmdPal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.data.sqlite\\10.0.13\\microsoft.data.sqlite.10.0.13.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.13\\microsoft.data.sqlite.core.10.0.13.nupkg.sha512",

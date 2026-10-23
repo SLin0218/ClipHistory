@@ -1,5 +1,4 @@
 param(
-    [ValidateSet("All", "CmdPal", "V1")]
     [string]$Target = "CmdPal",
     [switch]$Deploy,
     [switch]$Restart
@@ -47,118 +46,133 @@ if ($Target -eq "All" -or $Target -eq "CmdPal") {
     Write-Host ""
     Write-Host "=== [1] Building PowerToys Run V2 (CmdPal) Extension ===" -ForegroundColor Green
 
-    $cmdPalProj = Join-Path $root "CmdPalExt\SlinClipCmdPal.csproj"
+    $cmdPalProj = Join-Path $root "CmdPalExt\ClipHistoryCmdPal.csproj"
     $cmdPalPublish = Join-Path $root "CmdPalExt\publish"
     $assetsDir = Join-Path $root "CmdPalExt\Assets"
     $manifestPath = Join-Path $cmdPalPublish "AppxManifest.xml"
 
+    # Always stop running extension process to unlock binary during publish
+    Stop-Process -Name "ClipHistoryCmdPal", "SlinClipCmdPal" -Force -ErrorAction SilentlyContinue
     if ($Deploy) {
         Stop-Process -Name "Microsoft.CmdPal.UI" -Force -ErrorAction SilentlyContinue
-        Stop-Process -Name "SlinClipCmdPal" -Force -ErrorAction SilentlyContinue
         Start-Sleep -Milliseconds 600
     }
 
-    Write-Host "Publishing SlinClipCmdPal -> $cmdPalPublish" -ForegroundColor Cyan
+    Write-Host "Publishing ClipHistoryCmdPal -> $cmdPalPublish" -ForegroundColor Cyan
     & $dotnetPath publish $cmdPalProj -c Release -r win-x64 --self-contained false -o $cmdPalPublish --nologo
     if ($LASTEXITCODE -ne 0) {
         Write-Error "CmdPal extension publish failed!"
         exit $LASTEXITCODE
     }
 
-    Copy-Item -Path $assetsDir -Destination "$cmdPalPublish\Assets" -Recurse -Force
+    Copy-Item -Path (Join-Path $root "CmdPalExt\Package.appxmanifest") -Destination $manifestPath -Force
+    $targetAssets = Join-Path $cmdPalPublish "Assets"
+    if (-not (Test-Path $targetAssets)) { New-Item -ItemType Directory -Path $targetAssets -Force | Out-Null }
+    Remove-Item -Path (Join-Path $targetAssets "Assets") -Recurse -Force -ErrorAction SilentlyContinue
+    Copy-Item -Path "$assetsDir\*" -Destination $targetAssets -Recurse -Force
+
+    # Ensure WinMD and native Extension proxy DLL are present for cross-process WinRT marshaling
+    $cmdPalAppxDir = "C:\Program Files\WindowsApps\Microsoft.CommandPalette_0.11.11762.0_x64__8wekyb3d8bbwe"
+    if (Test-Path "$cmdPalAppxDir\Microsoft.CommandPalette.Extensions.winmd") {
+        try { Copy-Item -Path "$cmdPalAppxDir\Microsoft.CommandPalette.Extensions.winmd" -Destination $cmdPalPublish -Force -ErrorAction Stop } catch { }
+    }
+    if (Test-Path "$cmdPalAppxDir\Microsoft.CommandPalette.Extensions.dll") {
+        try { Copy-Item -Path "$cmdPalAppxDir\Microsoft.CommandPalette.Extensions.dll" -Destination $cmdPalPublish -Force -ErrorAction Stop } catch { }
+    }
 
     if ($Deploy) {
+        # Clean up legacy V1 plugin folder if present
+        $v1TargetDir = "$env:LOCALAPPDATA\Microsoft\PowerToys\PowerToys Run\Plugins\ClipHistory"
+        if (Test-Path $v1TargetDir) {
+            Remove-Item -Path $v1TargetDir -Recurse -Force -ErrorAction SilentlyContinue
+        }
+
+        # Unregister existing / older packages first to avoid 0x80073CFB re-registration conflict
+        $packageFilters = @("*ClipHistory.CommandPalette*", "*SlinClip.CommandPalette*")
+        foreach ($pkgFilter in $packageFilters) {
+            $pkgs = Get-AppxPackage $pkgFilter -ErrorAction SilentlyContinue
+            foreach ($pkg in $pkgs) {
+                Write-Host "Unregistering existing package: $($pkg.PackageFullName)" -ForegroundColor Yellow
+                Remove-AppxPackage -Package $pkg.PackageFullName -ErrorAction SilentlyContinue
+            }
+        }
+
+        # Grant read permissions to ALL APPLICATION PACKAGES for AppContainer access
+        icacls $cmdPalPublish /grant "*S-1-15-2-1:(OI)(CI)RX" /T /Q *>$null
+
         Write-Host "Registering AppxPackage: $manifestPath" -ForegroundColor Cyan
-        Add-AppxPackage -Register $manifestPath
+        Add-AppxPackage -Register $manifestPath -ForceApplicationShutdown
 
         $settingsPath = "$env:LOCALAPPDATA\Packages\Microsoft.CommandPalette_8wekyb3d8bbwe\LocalState\settings.json"
         if (Test-Path $settingsPath) {
             $json = Get-Content -Raw -Encoding UTF8 -Path $settingsPath | ConvertFrom-Json
-            $extKey = "SlinClip.CommandPalette_7gt9mds3x1cs6!App!SlinClipCmdPalExtension"
-            if (-not $json.ProviderSettings.PSObject.Properties[$extKey]) {
-                $provObj = [PSCustomObject]@{
-                    IsEnabled = $true
-                    FallbackCommands = [PSCustomObject]@{}
-                    PinnedCommandIds = @()
+            $currentPkg = Get-AppxPackage "*ClipHistory.CommandPalette*" -ErrorAction SilentlyContinue
+            if ($currentPkg) {
+                $extKey = "$($currentPkg.PackageFamilyName)!App!ClipHistoryCmdPalExtension"
+                if (-not $json.ProviderSettings.PSObject.Properties[$extKey]) {
+                    $provObj = [PSCustomObject]@{
+                        IsEnabled = $true
+                        FallbackCommands = [PSCustomObject]@{}
+                        PinnedCommandIds = @()
+                    }
+                    $json.ProviderSettings | Add-Member -MemberType NoteProperty -Name $extKey -Value $provObj
                 }
-                $json.ProviderSettings | Add-Member -MemberType NoteProperty -Name $extKey -Value $provObj
             }
-            if (-not $json.Aliases.PSObject.Properties["sc"]) {
-                $scObj = [PSCustomObject]@{
-                    CommandId = "SlinClipHistoryPage"
-                    Alias = "sc"
+
+            if (-not $json.Aliases.PSObject.Properties["ch"]) {
+                $chObj = [PSCustomObject]@{
+                    CommandId = "ClipHistoryPage"
+                    Alias = "ch"
                     IsDirect = $true
                 }
-                $json.Aliases | Add-Member -MemberType NoteProperty -Name "sc" -Value $scObj
+                $json.Aliases | Add-Member -MemberType NoteProperty -Name "ch" -Value $chObj
             }
             if (-not $json.Aliases.PSObject.Properties["clip"]) {
                 $clipObj = [PSCustomObject]@{
-                    CommandId = "SlinClipHistoryPage"
+                    CommandId = "ClipHistoryPage"
                     Alias = "clip"
                     IsDirect = $true
                 }
                 $json.Aliases | Add-Member -MemberType NoteProperty -Name "clip" -Value $clipObj
             }
-            $json | ConvertTo-Json -Depth 20 | Set-Content -Path $settingsPath -Encoding UTF8
-        }
-
-        $cachePath = "$env:LOCALAPPDATA\Packages\Microsoft.CommandPalette_8wekyb3d8bbwe\LocalState\commandProviderCache.json"
-        if (Test-Path $cachePath) {
-            $cacheJson = Get-Content -Raw -Encoding UTF8 -Path $cachePath | ConvertFrom-Json
-            $extKey = "SlinClip.CommandPalette_7gt9mds3x1cs6!App!SlinClipCmdPalExtension"
-            if (-not $cacheJson.Cache.PSObject.Properties[$extKey]) {
-                $dispObj = [PSCustomObject]@{ DisplayName = "Slin-Clip Clipboard History" }
-                $cacheJson.Cache | Add-Member -MemberType NoteProperty -Name $extKey -Value $dispObj
-                $cacheJson | ConvertTo-Json -Depth 10 | Set-Content -Path $cachePath -Encoding UTF8
+            if (-not $json.Aliases.PSObject.Properties["sc"]) {
+                $scObj = [PSCustomObject]@{
+                    CommandId = "ClipHistoryPage"
+                    Alias = "sc"
+                    IsDirect = $true
+                }
+                $json.Aliases | Add-Member -MemberType NoteProperty -Name "sc" -Value $scObj
             }
+            if (-not $json.Aliases.PSObject.Properties["ch-set"]) {
+                $chsetObj = [PSCustomObject]@{
+                    CommandId = "ClipHistorySettingsPage"
+                    Alias = "ch-set"
+                    IsDirect = $true
+                }
+                $json.Aliases | Add-Member -MemberType NoteProperty -Name "ch-set" -Value $chsetObj
+            }
+            if (-not $json.Aliases.PSObject.Properties["scs"]) {
+                $scsObj = [PSCustomObject]@{
+                    CommandId = "ClipHistorySettingsPage"
+                    Alias = "scs"
+                    IsDirect = $true
+                }
+                $json.Aliases | Add-Member -MemberType NoteProperty -Name "scs" -Value $scsObj
+            }
+            $newSettingsJson = ConvertTo-Json $json -Depth 20
+            [System.IO.File]::WriteAllText($settingsPath, $newSettingsJson, [System.Text.Encoding]::UTF8)
         }
 
         Write-Host "CmdPal Extension registered and configured successfully!" -ForegroundColor Green
 
         if ($Restart) {
-            Write-Host "Relaunching CmdPal UI..." -ForegroundColor Yellow
-            $cmdPalExe = "C:\Program Files\WindowsApps\Microsoft.CommandPalette_0.11.11762.0_x64__8wekyb3d8bbwe\Microsoft.CmdPal.UI.exe"
-            if (Test-Path $cmdPalExe) {
-                Start-Process $cmdPalExe
-                Write-Host "CmdPal UI restarted!" -ForegroundColor Green
-            }
-        }
-    }
-}
-
-# -------------------------------------------------------------
-# 2. Build & Deploy PowerToys Run V1 (Wox.Plugin) Plugin
-# -------------------------------------------------------------
-if ($Target -eq "All" -or $Target -eq "V1") {
-    Write-Host ""
-    Write-Host "=== [2] Building PowerToys Run V1 (Wox) Plugin ===" -ForegroundColor Green
-
-    $v1Publish = Join-Path $root "bin\Release\publish"
-    $v1Proj = Join-Path $root "SlinClip.csproj"
-
-    & $dotnetPath publish $v1Proj -c Release -o $v1Publish --nologo
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "V1 Plugin publish failed!"
-        exit $LASTEXITCODE
-    }
-
-    if ($Deploy) {
-        $targetDir = "$env:LOCALAPPDATA\Microsoft\PowerToys\PowerToys Run\Plugins\Slin-Clip"
-        Write-Host "Deploying V1 plugin to: $targetDir" -ForegroundColor Cyan
-        Stop-Process -Name "PowerToys.PowerLauncher" -Force -ErrorAction SilentlyContinue
-        Start-Sleep -Milliseconds 500
-
-        if (-not (Test-Path $targetDir)) {
-            New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
-        }
-        Copy-Item -Path "$v1Publish\*" -Destination $targetDir -Recurse -Force
-        Write-Host "V1 Deploy completed successfully!" -ForegroundColor Green
-
-        if ($Restart) {
-            $launcherExe = "C:\Users\USER\scoop\apps\powertoys\current\PowerToys.PowerLauncher.exe"
-            if (Test-Path $launcherExe) {
-                Start-Process $launcherExe
-                Write-Host "PowerLauncher restarted!" -ForegroundColor Green
+            Write-Host "Restarting PowerToys to host CmdPal V2..." -ForegroundColor Yellow
+            Stop-Process -Name "PowerToys*", "ClipHistoryCmdPal*", "SlinClip*" -Force -ErrorAction SilentlyContinue
+            Start-Sleep -Milliseconds 600
+            $ptExe = "C:\Users\USER\scoop\apps\powertoys\current\PowerToys.exe"
+            if (Test-Path $ptExe) {
+                Start-Process $ptExe
+                Write-Host "PowerToys restarted with CmdPal V2!" -ForegroundColor Green
             }
         }
     }

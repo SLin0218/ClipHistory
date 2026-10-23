@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../.github/schemas/extension.schema.json",
+  "id": "slin0218.clip-history",
+  "title": "ClipHistory",
+  "shortDescription": "High-performance, lightweight clipboard history extension for PowerToys Command Palette.",
+  "description": "ClipHistory is a native, lightweight and lightning-fast clipboard manager extension for PowerToys Command Palette. It features instant multi-modal search (text and images), sub-millisecond in-memory fuzzy search, pinned records, configurable retention limits, and full keyboard navigation.",
+  "author": {
+    "name": "SLin0218",
+    "url": "https://github.com/SLin0218"
+  },
+  "icon": "icon.png",
+  "homepage": "https://github.com/SLin0218/ClipHistory",
+  "tags": ["clipboard", "history", "productivity", "utility"],
+  "categories": ["productivity", "utilities-and-tools"],
+  "installSources": [
+    {
+      "type": "winget",
+      "id": "SLin0218.ClipHistory"
+    }
+  ]
+}

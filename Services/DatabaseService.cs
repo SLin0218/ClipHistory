@@ -36,12 +36,13 @@ public class DatabaseService : IDisposable
             using var conn = new SqliteConnection(_connectionString);
             conn.Open();
 
-            // 启用高性能 WAL 模式与调优
+            // 启用高性能 WAL 模式与调优，限制 WAL 日志增长
             using var pragmaCmd = conn.CreateCommand();
             pragmaCmd.CommandText = @"
                 PRAGMA journal_mode = WAL;
                 PRAGMA synchronous = NORMAL;
                 PRAGMA busy_timeout = 5000;
+                PRAGMA wal_autocheckpoint = 1000;
             ";
             pragmaCmd.ExecuteNonQuery();
 
@@ -238,21 +239,8 @@ public class DatabaseService : IDisposable
             delCmd.CommandText = $"DELETE FROM clips WHERE id IN ({string.Join(",", idsToDelete)});";
             delCmd.ExecuteNonQuery();
 
-            // 异步删除物理图片文件，避免阻塞 SQLite 事务
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                foreach (var file in filesToDelete)
-                {
-                    try
-                    {
-                        if (!string.IsNullOrEmpty(file) && File.Exists(file))
-                        {
-                            File.Delete(file);
-                        }
-                    }
-                    catch { }
-                }
-            });
+            // 异步安全删除物理图片文件（包含原图、缩略图与预览图）
+            DeleteAssociatedFilesSafe(filesToDelete);
         }
     }
 
@@ -301,14 +289,7 @@ public class DatabaseService : IDisposable
             delCmd.ExecuteNonQuery();
         }
 
-        if (!string.IsNullOrEmpty(imgPath) && File.Exists(imgPath))
-        {
-            try { File.Delete(imgPath); } catch { }
-        }
-        if (!string.IsNullOrEmpty(thumbPath) && File.Exists(thumbPath))
-        {
-            try { File.Delete(thumbPath); } catch { }
-        }
+        DeleteAssociatedFilesSafe(new[] { imgPath, thumbPath });
     }
 
     public void ClearAll(bool preservePinned = true)
@@ -341,22 +322,81 @@ public class DatabaseService : IDisposable
             delCmd.ExecuteNonQuery();
         }
 
-        foreach (var file in filesToDelete)
+        DeleteAssociatedFilesSafe(filesToDelete);
+    }
+
+    private static void CollectImageAndDerivedFiles(string? path, ISet<string> targetSet)
+    {
+        if (string.IsNullOrEmpty(path)) return;
+        targetSet.Add(path);
+
+        var dir = Path.GetDirectoryName(path);
+        if (string.IsNullOrEmpty(dir)) return;
+        var parentDir = Path.GetDirectoryName(dir);
+        if (string.IsNullOrEmpty(parentDir)) return;
+
+        var fileName = Path.GetFileNameWithoutExtension(path);
+        string hash;
+        if (fileName.StartsWith("img_")) hash = fileName.Substring(4);
+        else if (fileName.StartsWith("thumb_")) hash = fileName.Substring(6);
+        else if (fileName.StartsWith("prev_")) hash = fileName.Substring(5);
+        else hash = fileName;
+
+        targetSet.Add(Path.Combine(parentDir, "Images", $"img_{hash}.png"));
+        targetSet.Add(Path.Combine(parentDir, "Thumbs", $"thumb_{hash}.png"));
+        targetSet.Add(Path.Combine(parentDir, "Previews", $"prev_{hash}.png"));
+    }
+
+    private static void DeleteAssociatedFilesSafe(IEnumerable<string?> paths)
+    {
+        var allFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var p in paths)
         {
-            try
+            CollectImageAndDerivedFiles(p, allFiles);
+        }
+
+        if (allFiles.Count == 0) return;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            foreach (var file in allFiles)
             {
-                if (!string.IsNullOrEmpty(file) && File.Exists(file))
+                for (int i = 0; i < 5; i++)
                 {
-                    File.Delete(file);
+                    try
+                    {
+                        if (File.Exists(file))
+                        {
+                            File.Delete(file);
+                        }
+                        break;
+                    }
+                    catch (IOException)
+                    {
+                        await System.Threading.Tasks.Task.Delay(100);
+                    }
+                    catch
+                    {
+                        break;
+                    }
                 }
             }
-            catch { }
-        }
+        });
     }
 
     public void Dispose()
     {
-        // 释放可能占用的连接资源
+        try
+        {
+            using var conn = new SqliteConnection(_connectionString);
+            conn.Open();
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = "PRAGMA wal_checkpoint(PASSIVE);";
+            cmd.ExecuteNonQuery();
+        }
+        catch { }
+
+        // 释放可能占用的连接池资源
         SqliteConnection.ClearAllPools();
     }
 }

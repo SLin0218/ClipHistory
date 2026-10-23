@@ -1,4 +1,5 @@
 using System;
+using SlinClip.Services;
 
 namespace SlinClip.Models;
 
@@ -46,10 +47,10 @@ public class ClipItem
     public string GetFriendlyTime()
     {
         var diff = DateTime.Now - UpdatedAt;
-        if (diff.TotalSeconds < 60) return "刚刚";
-        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes} 分钟前";
-        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours} 小时前";
-        if (diff.TotalDays < 7) return $"{(int)diff.TotalDays} 天前";
+        if (diff.TotalSeconds < 60) return I18n.T("刚刚", "just now");
+        if (diff.TotalMinutes < 60) return string.Format(I18n.T("{0} 分钟前", "{0}m ago"), (int)diff.TotalMinutes);
+        if (diff.TotalHours < 24) return string.Format(I18n.T("{0} 小时前", "{0}h ago"), (int)diff.TotalHours);
+        if (diff.TotalDays < 7) return string.Format(I18n.T("{0} 天前", "{0}d ago"), (int)diff.TotalDays);
         return UpdatedAt.ToString("yyyy-MM-dd HH:mm");
     }
 
@@ -58,13 +59,13 @@ public class ClipItem
     /// </summary>
     public string GetSubtitle()
     {
-        var pinnedPrefix = IsPinned ? "📌 [置顶] " : "";
+        var pinnedPrefix = IsPinned ? I18n.T("[置顶] ", "[Pinned] ") : "";
         if (Type == ClipType.Image)
         {
-            return $"{pinnedPrefix}图片 · {ImageWidth}x{ImageHeight} · {GetFriendlyTime()}";
+            return $"{pinnedPrefix}{I18n.T("图片", "Image")} · {GetFriendlyTime()}";
         }
 
         var lines = Content.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Length;
-        return $"{pinnedPrefix}文本 · {CharCount} 字 ({lines} 行) · {GetFriendlyTime()}";
+        return $"{pinnedPrefix}{I18n.T("文本", "Text")} · {CharCount} {I18n.T("字", "chars")} ({lines} {I18n.T("行", "lines")}) · {GetFriendlyTime()}";
     }
 }

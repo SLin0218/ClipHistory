@@ -1,94 +1,131 @@
-# Slin-Clip (PowerToys Run / CmdPal 剪贴板历史插件)
+# ClipHistory (PowerToys Command Palette 剪贴板历史扩展)
 
-高性能、低延迟的 Windows PowerToys 剪贴板管理插件。原生支持 **PowerToys Run V2 (Command Palette / CmdPal)** 与 **PowerToys Run V1**，支持**文本**与**图片**历史记录，具备毫秒级内存模糊过滤与 SQLite WAL 高性能持久化。
-
----
-
-## ✨ 核心特性
-
-1. **多模态剪贴板支持**：
-   - **文本**：自动去重、计算字符数与行数、保留完整格式。
-   - **图片**：自动捕获并异步保存为轻量 PNG，生成 96px 缩略图用于列表秒级渲染，避免原图暴占内存。
-2. **极速过滤与性能平衡**：
-   - **两层架构（Two-tier Cache）**：启动时将最近历史条目元数据载入内存，用户在命令面板键入时**100% 纯内存过滤**（耗时通常 < 1ms），杜绝磁盘 I/O 引起的按键卡顿。
-   - **SQLite WAL 模式**：后台异步持久化，开启 Write-Ahead Logging 与 NORMAL 同步，兼顾极高写入吞吐与断电安全性。
-   - **LRU 自动淘汰**：默认保存 500 条记录（可配置），超出上限自动清理未置顶的旧记录，并同步删除过期的物理图片文件。
-3. **无缝自动粘贴**：
-   - 回车选定历史后，自动写回剪贴板并模拟 `Ctrl + V` 粘贴到目标窗口。
-   - 内置防自循环机制，避免自身写回剪贴板时被重复录入。
-4. **丰富的交互与右键菜单**：
-   - 📌 **置顶**：收藏重要文本/图片，置顶项永不被 LRU 淘汰。
-   - 📋 **仅复制**：只写入剪切板，不自动触发 Ctrl+V。
-   - 🗑️ **删除单条 / 清空未置顶历史**。
-   - 🖼️ **图片预览卡片**：右侧详情窗格直接显示图片高分预览与详细元数据。
+[English](#english) | [简体中文](#简体中文)
 
 ---
 
-## 🚀 使用方法
+<a name="简体中文"></a>
+## 🇨🇳 简体中文
 
-### 呼出插件（PowerToys Run V2 / Command Palette）
+高性能、低资源占用的 Windows PowerToys Command Palette 原生剪贴板历史扩展。全面支持**文本**与**图片**历史捕获、毫秒级内存模糊搜索。
 
-按全局快捷键 **`Alt + Space`** 唤起 Command Palette：
+### 🚀 呼出与使用方式
 
-1. **直接搜索**：键入触发词或别名：
-   - 输入 **`sc`** 或 **`clip`**：直接进入 Slin-Clip 剪切板管理页面。
-   - 或输入 **`剪切板`** / **`Slin`**：在全局命令列表中点击进入。
-   - 如果启用了 Windows 内置剪贴板扩展，亦可输入 **`cb`**。
-2. **在列表中过滤**：
-   - 输入任意关键词即时过滤文本。
-   - 输入 `img` / `pic` / `图片` 快速列出所有捕获的图像。
-3. **快捷键操作**：
-   - **Enter / 单击**：复制并自动模拟 `Ctrl + V` 粘贴到前台窗口。
-   - **Tab / 右键 / ... 菜单**：打开功能菜单（仅复制、置顶/取消置顶、删除记录、清空历史）。
+在 Windows 中按 **`Alt + Space`** 唤起 PowerToys Command Palette：
+
+1. **进入插件**：
+   - 输入别名：**`ch`** 或 **`clip`**，直接进入 ClipHistory 搜索列表。
+   - 或输入 **`剪贴板`** / **`历史`** 均可快速进入。
+2. **快速检索**：
+   - 键入任意关键词即时过滤文本。
+   - 键入 `img`、`pic` 或 `图片` 快速定位所有图像条目。
+3. **管理与配置**：
+   - 点击顶部或菜单中的 **设置 (Settings)**，进入配置页调整保留数量与语言。
 
 ---
 
-## 🛠️ 项目目录结构
+### 🛠️ 项目结构
 
 ```text
-Slin-Clip/
-├── CmdPalExt/                # PowerToys Run V2 (Command Palette) 扩展工程
-│   ├── SlinClipCmdPal.csproj # 目标 net8.0-windows10.0.22000.0，引用 CsWinRT 与 WinRTServer
-│   ├── ClipExtension.cs      # IExtension 根入口与 COM CLSID 绑定
-│   ├── ClipCommandProvider.cs# ICommandProvider 命令提供者
-│   ├── ClipHistoryPage.cs    # IDynamicListPage 动态图文搜索页面与右侧详情卡片
-│   ├── CmdPalModels.cs       # WinRT 接口投影模型与日志工具
-│   ├── Program.cs            # -RegisterProcessAsComServer COM 服务激活
-│   ├── Assets/               # AppX 应用图标与资产
-│   └── publish/              # 编译发布产物与 AppxManifest.xml
-├── SlinClip.csproj           # PowerToys Run V1 (.NET 8 WPF 类库)
-├── plugin.json               # PowerToys Run V1 插件元数据
-├── Main.cs                   # PowerToys Run V1 (Wox.Plugin) 插件实现
+ClipHistory/
+├── CmdPalExt/                  # PowerToys Command Palette 扩展工程
+│   ├── ClipHistoryCmdPal.csproj# 目标 net8.0-windows10.0.22000.0 (WinRT COM Server)
+│   ├── ClipExtension.cs        # IExtension 根入口与生命周期管理
+│   ├── ClipCommandProvider.cs  # TopLevelCommands 命令提供者
+│   ├── ClipHistoryPage.cs      # 图文列表搜索页、Markdown 详情预览与快捷键
+│   ├── ClipSettingsContentPage.cs # 扩展设置表单页面
+│   ├── Package.appxmanifest    # AppX 打包清单
+│   ├── Assets/                 # 应用与扩展图标资源
+│   └── Program.cs              # COM 服务注册入口 (-RegisterProcessAsComServer)
 ├── Models/
-│   ├── ClipItem.cs           # 剪贴板条目通用数据模型
-│   └── ClipType.cs           # 条目类型 (Text / Image)
+│   ├── ClipItem.cs             # 核心数据条目模型
+│   └── ClipType.cs             # 剪贴板类型枚举 (Text / Image)
 ├── Services/
-│   ├── ClipboardWatcher.cs   # Win32 AddClipboardFormatListener 后台监听器
-│   ├── DatabaseService.cs    # SQLite WAL 存储引擎与 LRU 自动淘汰
-│   ├── ThumbnailService.cs   # 图片缩略图生成与文件持久化
-│   └── KeyboardSimulator.cs  # Win32 SendInput 自动粘贴与键盘模拟
-├── Images/                   # 图标资源
-└── build.ps1                 # 一键编译、打包、注册与部署脚本
+│   ├── ClipboardWatcher.cs     # Win32 剪贴板底层监听 (WM_CLIPBOARDUPDATE)
+│   ├── DatabaseService.cs      # SQLite WAL 读写与自动修剪引擎
+│   ├── ThumbnailService.cs     # 缩略图生成与内存安全文件存储
+│   ├── SettingsService.cs      # 用户配置持久化服务
+│   └── I18n.cs                 # 中英双语国际化字典
+├── distribution/               # 微软官方扩展商店与 WinGet 提交清单
+└── build.ps1                   # 一键编译、打包、测试与部署脚本
 ```
 
 ---
 
-## 📦 编译与部署
+### 📦 本地编译与部署
 
-通过根目录下的 `build.ps1` 脚本即可一键完成全流程：
+通过根目录下的 `build.ps1` 脚本进行一键化构建与注册：
 
 ```powershell
-# 1. 一键编译并部署 PowerToys Run V2 (CmdPal) 扩展并自动重启 CmdPal：
-.\build.ps1 -Target CmdPal -Deploy -Restart
-
-# 2. 一键编译并部署 PowerToys Run V1 插件：
-.\build.ps1 -Target V1 -Deploy -Restart
-
-# 3. 编译两者：
-.\build.ps1 -Target All -Deploy -Restart
+# 一键编译并部署 CmdPal 扩展并自动重启生效：
+.\build.ps1 -Deploy -Restart
 ```
 
-数据与日志存储位置：
-* **SQLite 数据库**：`%APPDATA%\PowerToys\SlinClip\slin_clip.db`
-* **缓存图片目录**：`%APPDATA%\PowerToys\SlinClip\Images\`
-* **CmdPal 运行日志**：`%APPDATA%\PowerToys\SlinClip\cmdpal_extension.log`
+**数据存储路径**：
+* 数据库：`%APPDATA%\PowerToys\ClipHistory\clip_history.db`
+* 缓存图片目录：`%APPDATA%\PowerToys\ClipHistory\Images\`
+* 运行日志：`%APPDATA%\PowerToys\ClipHistory\cmdpal_extension.log`
+
+---
+
+<a name="english"></a>
+## 🌐 English
+
+High-performance, memory-efficient Windows PowerToys Command Palette native clipboard history extension. Features text and image history capture, and sub-millisecond in-memory fuzzy search.
+
+### 🚀 Usage
+
+Press **`Alt + Space`** to open PowerToys Command Palette:
+
+1. **Open Extension**:
+   - Type alias: **`ch`** or **`clip`** to jump directly into the ClipHistory search page.
+   - Or search **`clipboard`** / **`history`**.
+2. **Instant Search**:
+   - Type any keyword to instantly filter text entries.
+   - Type `img`, `pic`, or `image` to quickly filter image entries.
+3. **Settings & Configuration**:
+   - Click **Settings** in the top bar or menu to customize max history limits and language.
+
+---
+
+### 🛠️ Project Structure
+
+```text
+ClipHistory /
+├── CmdPalExt/                  # PowerToys Command Palette extension project
+│   ├── ClipHistoryCmdPal.csproj# Targets net8.0-windows10.0.22000.0 (WinRT COM Server)
+│   ├── ClipExtension.cs        # IExtension root entry and lifecycle management
+│   ├── ClipCommandProvider.cs  # TopLevelCommands provider
+│   ├── ClipHistoryPage.cs      # Dynamic list search page, Markdown preview, and shortcuts
+│   ├── ClipSettingsContentPage.cs # Extension settings AdaptiveCard form page
+│   ├── Package.appxmanifest    # AppX package manifest
+│   ├── Assets/                 # Application & extension icons
+│   └── Program.cs              # COM server entry (-RegisterProcessAsComServer)
+├── Models/
+│   ├── ClipItem.cs             # Core clipboard item model
+│   └── ClipType.cs             # Item type enum (Text / Image)
+├── Services/
+│   ├── ClipboardWatcher.cs     # Win32 clipboard listener (WM_CLIPBOARDUPDATE)
+│   ├── DatabaseService.cs      # SQLite WAL persistence and LRU prune engine
+│   ├── ThumbnailService.cs     # Thumbnail generation and leak-free image storage
+│   ├── SettingsService.cs      # User settings persistence service
+│   └── I18n.cs                 # Bilingual (zh-CN & en-US) localization dictionary
+├── distribution/               # CmdPal extension gallery & WinGet manifests
+└── build.ps1                   # One-click build, package, test, and deploy script
+```
+
+---
+
+### 📦 Local Build & Deployment
+
+Use the [`build.ps1`](build.ps1) PowerShell script to build, package, and deploy with one click:
+
+```powershell
+# Build and deploy extension, and restart PowerToys:
+.\build.ps1 -Deploy -Restart
+```
+
+**Data & Log Paths**:
+* SQLite Database: `%APPDATA%\PowerToys\ClipHistory\clip_history.db`
+* Cached Images: `%APPDATA%\PowerToys\ClipHistory\Images\`
+* CmdPal Extension Log: `%APPDATA%\PowerToys\ClipHistory\cmdpal_extension.log`

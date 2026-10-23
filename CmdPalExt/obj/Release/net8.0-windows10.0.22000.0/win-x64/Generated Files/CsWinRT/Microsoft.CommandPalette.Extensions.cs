@@ -191,12 +191,6 @@ namespace Microsoft.CommandPalette.Extensions
         IDetailsElement[] Metadata { get; }
         string Title { get; }
     }
-    [global::WinRT.WindowsRuntimeType("Microsoft.CommandPalette.Extensions")][Guid("D48CE911-873E-5C84-AF98-70D90BCF2291")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Microsoft.CommandPalette.Extensions.IDetails2))]
-    [global::Windows.Foundation.Metadata.ContractVersion(typeof(ExtensionsContract), 65536u)]
-    public interface IDetails2 : IDetails
-    {
-        IContent[] GetContent();
-    }
     [global::WinRT.WindowsRuntimeType("Microsoft.CommandPalette.Extensions")][Guid("B1F3DDCC-A47C-5480-9495-4F7EC06FC781")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Microsoft.CommandPalette.Extensions.IDetailsCommands))]
     [global::Windows.Foundation.Metadata.ContractVersion(typeof(ExtensionsContract), 65536u)]
     public interface IDetailsCommands : IDetailsData
@@ -307,12 +301,6 @@ namespace Microsoft.CommandPalette.Extensions
         string DataJson { get; }
         string StateJson { get; }
         string TemplateJson { get; }
-    }
-    [global::WinRT.WindowsRuntimeType("Microsoft.CommandPalette.Extensions")][Guid("85606EB5-BEB5-56BA-8FAA-619F6078C1D4")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Microsoft.CommandPalette.Extensions.IFormContent2))]
-    [global::Windows.Foundation.Metadata.ContractVersion(typeof(ExtensionsContract), 65536u)]
-    public interface IFormContent2 : IFormContent, IContent, INotifyPropChanged
-    {
-        ICommandResult SubmitAction(string actionId, string inputs, string data);
     }
     [global::WinRT.WindowsRuntimeType("Microsoft.CommandPalette.Extensions")][Guid("E2CD9402-042B-5BD3-92D5-E81B48F39024")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Microsoft.CommandPalette.Extensions.IGalleryGridLayout))]
     [global::Windows.Foundation.Metadata.ContractVersion(typeof(ExtensionsContract), 65536u)]
@@ -520,13 +508,6 @@ namespace Microsoft.CommandPalette.Extensions
     {
         string Message { get; }
         ICommandResult Result { get; }
-    }
-    [global::WinRT.WindowsRuntimeType("Microsoft.CommandPalette.Extensions")][Guid("216C77AB-A5B6-5FC2-B944-57C34707CFAC")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Microsoft.CommandPalette.Extensions.IToastArgs2))]
-    [global::Windows.Foundation.Metadata.ContractVersion(typeof(ExtensionsContract), 65536u)]
-    public interface IToastArgs2 : IToastArgs, ICommandResultArgs
-    {
-        ICommand Command { get; }
-        IIconInfo Icon { get; }
     }
     [global::WinRT.WindowsRuntimeType("Microsoft.CommandPalette.Extensions")][Guid("F08D59C3-1ED8-5E9B-85DF-1798CE4BE423")][global::WinRT.WindowsRuntimeHelperType(typeof(global::ABI.Microsoft.CommandPalette.Extensions.ITreeContent))]
     [global::Windows.Foundation.Metadata.ContractVersion(typeof(ExtensionsContract), 65536u)]
@@ -3064,92 +3045,6 @@ namespace ABI.Microsoft.CommandPalette.Extensions
         }
     }
 
-    public static class IDetails2Methods
-    {
-
-
-        public static unsafe global::Microsoft.CommandPalette.Extensions.IContent[] GetContent(IObjectReference _obj)
-        {
-            var ThisPtr = _obj.ThisPtr;
-
-            int __retval_length = default;
-            IntPtr __retval_data = default;
-            try
-            {
-                global::WinRT.ExceptionHelpers.ThrowExceptionForHR((*(delegate* unmanaged[Stdcall]<IntPtr, int*, IntPtr*, int>**)ThisPtr)[6](ThisPtr, &__retval_length, &__retval_data));
-                return MarshalInterface<global::Microsoft.CommandPalette.Extensions.IContent>.FromAbiArray((__retval_length, __retval_data));
-            }
-            finally
-            {
-                MarshalInterface<global::Microsoft.CommandPalette.Extensions.IContent>.DisposeAbiArray((__retval_length, __retval_data));
-            }
-        }
-
-
-        public static ref readonly global::System.Guid IID
-        {
-            [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                global::System.ReadOnlySpan<byte> data = new byte[] { 0x11, 0xE9, 0x8C, 0xD4, 0x3E, 0x87, 0x84, 0x5C, 0xAF, 0x98, 0x70, 0xD9, 0xB, 0xCF, 0x22, 0x91 };
-                return ref global::System.Runtime.CompilerServices.Unsafe.As<byte, global::System.Guid>(ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(data));
-            }
-        }
-
-        public static global::System.IntPtr AbiToProjectionVftablePtr => IDetails2.AbiToProjectionVftablePtr;
-
-    }
-    [DynamicInterfaceCastableImplementation]
-    [Guid("D48CE911-873E-5C84-AF98-70D90BCF2291")]
-    internal unsafe interface IDetails2 : global::Microsoft.CommandPalette.Extensions.IDetails2
-    {
-
-        public static readonly IntPtr AbiToProjectionVftablePtr;
-        static unsafe IDetails2()
-        {
-            AbiToProjectionVftablePtr = ComWrappersSupport.AllocateVtableMemory(typeof(IDetails2), sizeof(IInspectable.Vftbl) + sizeof(IntPtr) * 1);
-            *(IInspectable.Vftbl*)AbiToProjectionVftablePtr = IInspectable.Vftbl.AbiToProjectionVftable;
-            ((delegate* unmanaged[Stdcall]<IntPtr, int*, IntPtr*, int>*)AbiToProjectionVftablePtr)[6] = &Do_Abi_GetContent_0;
-        }
-
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
-        private static unsafe int Do_Abi_GetContent_0(IntPtr thisPtr, int* __resultSize, IntPtr* result)
-        {
-
-            global::Microsoft.CommandPalette.Extensions.IContent[] __result = default;
-
-            *result = default;
-            *__resultSize = default;
-
-            try
-            {
-                __result = global::WinRT.ComWrappersSupport.FindObject<global::Microsoft.CommandPalette.Extensions.IDetails2>(thisPtr).GetContent();
-                (*__resultSize, *result) = MarshalInterface<global::Microsoft.CommandPalette.Extensions.IContent>.FromManagedArray(__result);
-
-            }
-            catch (Exception __exception__)
-            {
-                global::WinRT.ExceptionHelpers.SetErrorInfo(__exception__);
-                return global::WinRT.ExceptionHelpers.GetHRForException(__exception__);
-            }
-            return 0;
-        }
-
-        unsafe global::Microsoft.CommandPalette.Extensions.IContent[] global::Microsoft.CommandPalette.Extensions.IDetails2.GetContent()
-        {
-            var _obj = ((IObjectReference)((IWinRTObject)this).GetObjectReferenceForType(typeof(global::Microsoft.CommandPalette.Extensions.IDetails2).TypeHandle));
-            return global::ABI.Microsoft.CommandPalette.Extensions.IDetails2Methods.GetContent(_obj);
-        }
-
-        string global::Microsoft.CommandPalette.Extensions.IDetails.Body => ((global::Microsoft.CommandPalette.Extensions.IDetails)(IWinRTObject)this).Body;
-
-        global::Microsoft.CommandPalette.Extensions.IIconInfo global::Microsoft.CommandPalette.Extensions.IDetails.HeroImage => ((global::Microsoft.CommandPalette.Extensions.IDetails)(IWinRTObject)this).HeroImage;
-
-        global::Microsoft.CommandPalette.Extensions.IDetailsElement[] global::Microsoft.CommandPalette.Extensions.IDetails.Metadata => ((global::Microsoft.CommandPalette.Extensions.IDetails)(IWinRTObject)this).Metadata;
-
-        string global::Microsoft.CommandPalette.Extensions.IDetails.Title => ((global::Microsoft.CommandPalette.Extensions.IDetails)(IWinRTObject)this).Title;
-    }
-
     public static class IDetailsCommandsMethods
     {
 
@@ -5003,102 +4898,6 @@ namespace ABI.Microsoft.CommandPalette.Extensions
                 return global::ABI.Microsoft.CommandPalette.Extensions.IFormContentMethods.get_TemplateJson(_obj);
             }
         }
-
-        event global::Windows.Foundation.TypedEventHandler<object, global::Microsoft.CommandPalette.Extensions.IPropChangedEventArgs> global::Microsoft.CommandPalette.Extensions.INotifyPropChanged.PropChanged
-        {
-            add => ((global::Microsoft.CommandPalette.Extensions.INotifyPropChanged)(IWinRTObject)this).PropChanged += value;
-            remove => ((global::Microsoft.CommandPalette.Extensions.INotifyPropChanged)(IWinRTObject)this).PropChanged -= value;
-        }
-    }
-
-    public static class IFormContent2Methods
-    {
-
-
-        public static unsafe global::Microsoft.CommandPalette.Extensions.ICommandResult SubmitAction(IObjectReference _obj, string actionId, string inputs, string data)
-        {
-            var ThisPtr = _obj.ThisPtr;
-
-            IntPtr __retval = default;
-            try
-            {
-                MarshalString.Pinnable __actionId = new(actionId);
-                MarshalString.Pinnable __inputs = new(inputs);
-                MarshalString.Pinnable __data = new(data);
-                fixed(void* ___actionId = __actionId, ___inputs = __inputs, ___data = __data)
-                {
-                    global::WinRT.ExceptionHelpers.ThrowExceptionForHR((*(delegate* unmanaged[Stdcall]<IntPtr, IntPtr, IntPtr, IntPtr, IntPtr*, int>**)ThisPtr)[6](ThisPtr, MarshalString.GetAbi(ref __actionId), MarshalString.GetAbi(ref __inputs), MarshalString.GetAbi(ref __data), &__retval));
-                    return MarshalInterface<global::Microsoft.CommandPalette.Extensions.ICommandResult>.FromAbi(__retval);
-                }
-            }
-            finally
-            {
-                MarshalInterface<global::Microsoft.CommandPalette.Extensions.ICommandResult>.DisposeAbi(__retval);
-            }
-        }
-
-
-        public static ref readonly global::System.Guid IID
-        {
-            [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                global::System.ReadOnlySpan<byte> data = new byte[] { 0xB5, 0x6E, 0x60, 0x85, 0xB5, 0xBE, 0xBA, 0x56, 0x8F, 0xAA, 0x61, 0x9F, 0x60, 0x78, 0xC1, 0xD4 };
-                return ref global::System.Runtime.CompilerServices.Unsafe.As<byte, global::System.Guid>(ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(data));
-            }
-        }
-
-        public static global::System.IntPtr AbiToProjectionVftablePtr => IFormContent2.AbiToProjectionVftablePtr;
-
-    }
-    [DynamicInterfaceCastableImplementation]
-    [Guid("85606EB5-BEB5-56BA-8FAA-619F6078C1D4")]
-    internal unsafe interface IFormContent2 : global::Microsoft.CommandPalette.Extensions.IFormContent2
-    {
-
-        public static readonly IntPtr AbiToProjectionVftablePtr;
-        static unsafe IFormContent2()
-        {
-            AbiToProjectionVftablePtr = ComWrappersSupport.AllocateVtableMemory(typeof(IFormContent2), sizeof(IInspectable.Vftbl) + sizeof(IntPtr) * 1);
-            *(IInspectable.Vftbl*)AbiToProjectionVftablePtr = IInspectable.Vftbl.AbiToProjectionVftable;
-            ((delegate* unmanaged[Stdcall]<IntPtr, IntPtr, IntPtr, IntPtr, IntPtr*, int>*)AbiToProjectionVftablePtr)[6] = &Do_Abi_SubmitAction_0;
-        }
-
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
-        private static unsafe int Do_Abi_SubmitAction_0(IntPtr thisPtr, IntPtr actionId, IntPtr inputs, IntPtr data, IntPtr* result)
-        {
-
-            global::Microsoft.CommandPalette.Extensions.ICommandResult __result = default;
-
-            *result = default;
-
-            try
-            {
-                __result = global::WinRT.ComWrappersSupport.FindObject<global::Microsoft.CommandPalette.Extensions.IFormContent2>(thisPtr).SubmitAction(MarshalString.FromAbi(actionId), MarshalString.FromAbi(inputs), MarshalString.FromAbi(data));
-                *result = MarshalInterface<global::Microsoft.CommandPalette.Extensions.ICommandResult>.FromManaged(__result);
-
-            }
-            catch (Exception __exception__)
-            {
-                global::WinRT.ExceptionHelpers.SetErrorInfo(__exception__);
-                return global::WinRT.ExceptionHelpers.GetHRForException(__exception__);
-            }
-            return 0;
-        }
-
-        unsafe global::Microsoft.CommandPalette.Extensions.ICommandResult global::Microsoft.CommandPalette.Extensions.IFormContent2.SubmitAction(string actionId, string inputs, string data)
-        {
-            var _obj = ((IObjectReference)((IWinRTObject)this).GetObjectReferenceForType(typeof(global::Microsoft.CommandPalette.Extensions.IFormContent2).TypeHandle));
-            return global::ABI.Microsoft.CommandPalette.Extensions.IFormContent2Methods.SubmitAction(_obj, actionId, inputs, data);
-        }
-
-        global::Microsoft.CommandPalette.Extensions.ICommandResult global::Microsoft.CommandPalette.Extensions.IFormContent.SubmitForm(string inputs, string data) => ((global::Microsoft.CommandPalette.Extensions.IFormContent)(IWinRTObject)this).SubmitForm(inputs, data);
-
-        string global::Microsoft.CommandPalette.Extensions.IFormContent.DataJson => ((global::Microsoft.CommandPalette.Extensions.IFormContent)(IWinRTObject)this).DataJson;
-
-        string global::Microsoft.CommandPalette.Extensions.IFormContent.StateJson => ((global::Microsoft.CommandPalette.Extensions.IFormContent)(IWinRTObject)this).StateJson;
-
-        string global::Microsoft.CommandPalette.Extensions.IFormContent.TemplateJson => ((global::Microsoft.CommandPalette.Extensions.IFormContent)(IWinRTObject)this).TemplateJson;
 
         event global::Windows.Foundation.TypedEventHandler<object, global::Microsoft.CommandPalette.Extensions.IPropChangedEventArgs> global::Microsoft.CommandPalette.Extensions.INotifyPropChanged.PropChanged
         {
@@ -8900,136 +8699,6 @@ namespace ABI.Microsoft.CommandPalette.Extensions
                 return global::ABI.Microsoft.CommandPalette.Extensions.IToastArgsMethods.get_Result(_obj);
             }
         }
-    }
-
-    public static class IToastArgs2Methods
-    {
-
-        public static unsafe global::Microsoft.CommandPalette.Extensions.ICommand get_Command(IObjectReference _obj)
-        {
-            var ThisPtr = _obj.ThisPtr;
-
-            IntPtr __retval = default;
-            try
-            {
-                global::WinRT.ExceptionHelpers.ThrowExceptionForHR((*(delegate* unmanaged[Stdcall]<IntPtr, IntPtr*, int>**)ThisPtr)[7](ThisPtr, &__retval));
-                return MarshalInterface<global::Microsoft.CommandPalette.Extensions.ICommand>.FromAbi(__retval);
-            }
-            finally
-            {
-                MarshalInterface<global::Microsoft.CommandPalette.Extensions.ICommand>.DisposeAbi(__retval);
-            }
-        }
-
-        public static unsafe global::Microsoft.CommandPalette.Extensions.IIconInfo get_Icon(IObjectReference _obj)
-        {
-            var ThisPtr = _obj.ThisPtr;
-
-            IntPtr __retval = default;
-            try
-            {
-                global::WinRT.ExceptionHelpers.ThrowExceptionForHR((*(delegate* unmanaged[Stdcall]<IntPtr, IntPtr*, int>**)ThisPtr)[6](ThisPtr, &__retval));
-                return MarshalInterface<global::Microsoft.CommandPalette.Extensions.IIconInfo>.FromAbi(__retval);
-            }
-            finally
-            {
-                MarshalInterface<global::Microsoft.CommandPalette.Extensions.IIconInfo>.DisposeAbi(__retval);
-            }
-        }
-
-
-
-        public static ref readonly global::System.Guid IID
-        {
-            [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                global::System.ReadOnlySpan<byte> data = new byte[] { 0xAB, 0x77, 0x6C, 0x21, 0xB6, 0xA5, 0xC2, 0x5F, 0xB9, 0x44, 0x57, 0xC3, 0x47, 0x7, 0xCF, 0xAC };
-                return ref global::System.Runtime.CompilerServices.Unsafe.As<byte, global::System.Guid>(ref global::System.Runtime.InteropServices.MemoryMarshal.GetReference(data));
-            }
-        }
-
-        public static global::System.IntPtr AbiToProjectionVftablePtr => IToastArgs2.AbiToProjectionVftablePtr;
-
-    }
-    [DynamicInterfaceCastableImplementation]
-    [Guid("216C77AB-A5B6-5FC2-B944-57C34707CFAC")]
-    internal unsafe interface IToastArgs2 : global::Microsoft.CommandPalette.Extensions.IToastArgs2
-    {
-
-        public static readonly IntPtr AbiToProjectionVftablePtr;
-        static unsafe IToastArgs2()
-        {
-            AbiToProjectionVftablePtr = ComWrappersSupport.AllocateVtableMemory(typeof(IToastArgs2), sizeof(IInspectable.Vftbl) + sizeof(IntPtr) * 2);
-            *(IInspectable.Vftbl*)AbiToProjectionVftablePtr = IInspectable.Vftbl.AbiToProjectionVftable;
-            ((delegate* unmanaged[Stdcall]<IntPtr, IntPtr*, int>*)AbiToProjectionVftablePtr)[6] = &Do_Abi_get_Icon_0;
-            ((delegate* unmanaged[Stdcall]<IntPtr, IntPtr*, int>*)AbiToProjectionVftablePtr)[7] = &Do_Abi_get_Command_1;
-        }
-
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
-        private static unsafe int Do_Abi_get_Command_1(IntPtr thisPtr, IntPtr* value)
-        {
-
-            global::Microsoft.CommandPalette.Extensions.ICommand __value = default;
-
-            *value = default;
-
-            try
-            {
-                __value = global::WinRT.ComWrappersSupport.FindObject<global::Microsoft.CommandPalette.Extensions.IToastArgs2>(thisPtr).Command;
-                *value = MarshalInterface<global::Microsoft.CommandPalette.Extensions.ICommand>.FromManaged(__value);
-
-            }
-            catch (Exception __exception__)
-            {
-                global::WinRT.ExceptionHelpers.SetErrorInfo(__exception__);
-                return global::WinRT.ExceptionHelpers.GetHRForException(__exception__);
-            }
-            return 0;
-        }
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
-        private static unsafe int Do_Abi_get_Icon_0(IntPtr thisPtr, IntPtr* value)
-        {
-
-            global::Microsoft.CommandPalette.Extensions.IIconInfo __value = default;
-
-            *value = default;
-
-            try
-            {
-                __value = global::WinRT.ComWrappersSupport.FindObject<global::Microsoft.CommandPalette.Extensions.IToastArgs2>(thisPtr).Icon;
-                *value = MarshalInterface<global::Microsoft.CommandPalette.Extensions.IIconInfo>.FromManaged(__value);
-
-            }
-            catch (Exception __exception__)
-            {
-                global::WinRT.ExceptionHelpers.SetErrorInfo(__exception__);
-                return global::WinRT.ExceptionHelpers.GetHRForException(__exception__);
-            }
-            return 0;
-        }
-
-        unsafe global::Microsoft.CommandPalette.Extensions.ICommand global::Microsoft.CommandPalette.Extensions.IToastArgs2.Command
-        {
-            get
-            {
-                var _obj = ((IObjectReference)((IWinRTObject)this).GetObjectReferenceForType(typeof(global::Microsoft.CommandPalette.Extensions.IToastArgs2).TypeHandle));
-                return global::ABI.Microsoft.CommandPalette.Extensions.IToastArgs2Methods.get_Command(_obj);
-            }
-        }
-
-        unsafe global::Microsoft.CommandPalette.Extensions.IIconInfo global::Microsoft.CommandPalette.Extensions.IToastArgs2.Icon
-        {
-            get
-            {
-                var _obj = ((IObjectReference)((IWinRTObject)this).GetObjectReferenceForType(typeof(global::Microsoft.CommandPalette.Extensions.IToastArgs2).TypeHandle));
-                return global::ABI.Microsoft.CommandPalette.Extensions.IToastArgs2Methods.get_Icon(_obj);
-            }
-        }
-
-        string global::Microsoft.CommandPalette.Extensions.IToastArgs.Message => ((global::Microsoft.CommandPalette.Extensions.IToastArgs)(IWinRTObject)this).Message;
-
-        global::Microsoft.CommandPalette.Extensions.ICommandResult global::Microsoft.CommandPalette.Extensions.IToastArgs.Result => ((global::Microsoft.CommandPalette.Extensions.IToastArgs)(IWinRTObject)this).Result;
     }
 
     public static class ITreeContentMethods

@@ -1,49 +1,43 @@
 using System;
-using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.CommandPalette.Extensions;
 using Shmuelie.WinRTServer;
 using Shmuelie.WinRTServer.CsWinRT;
 
 namespace SlinClipCmdPal
 {
-    public static class Program
+    public class Program
     {
-        [STAThread]
-        public static async Task Main(string[] args)
+        [MTAThread]
+        public static void Main(string[] args)
         {
+            ExtLog.Info($"Program.Main started with args: {string.Join(" ", args)}");
+
             if (args.Length > 0 && args[0].Equals("-RegisterProcessAsComServer", StringComparison.OrdinalIgnoreCase))
             {
-                var serverDisposed = new TaskCompletionSource();
-                await using var server = new ComServer();
+                global::Shmuelie.WinRTServer.ComServer server = new();
+                var extensionDisposedEvent = new ManualResetEvent(false);
 
-                ClipExtension? extensionInstance = null;
+                var extensionInstance = new ClipExtension(extensionDisposedEvent);
+                server.RegisterClass<ClipExtension, IExtension>(() => extensionInstance);
 
-                server.RegisterClass<ClipExtension, IExtension>(() =>
-                {
-                    extensionInstance = new ClipExtension();
-                    return extensionInstance;
-                });
-
+                ExtLog.Info("ComServer.Start() calling...");
                 server.Start();
+                ExtLog.Info("ComServer running, waiting for extensionDisposedEvent...");
 
-                // Keep process alive while ComServer is active
-                await serverDisposed.Task;
+                extensionDisposedEvent.WaitOne();
 
-                extensionInstance?.Dispose();
+                ExtLog.Info("extensionDisposedEvent signaled, stopping server...");
                 server.Stop();
+                server.UnsafeDispose();
             }
             else
             {
-                Console.WriteLine("========================================");
-                Console.WriteLine(" Slin-Clip CmdPal Extension (Standalone)");
-                Console.WriteLine("========================================");
-                var ext = new ClipExtension();
-                Console.WriteLine("Initialized ClipExtension successfully.");
+                Console.WriteLine("ClipHistory CmdPal Extension (Standalone)");
+                var evt = new ManualResetEvent(false);
+                var ext = new ClipExtension(evt);
                 var provider = (ClipCommandProvider?)ext.GetProvider(ProviderType.Commands);
-                var commands = provider?.TopLevelCommands();
-                Console.WriteLine($"TopLevelCommands count: {commands?.Length}");
-                Console.WriteLine("Press Enter to exit...");
-                Console.ReadLine();
+                Console.WriteLine($"TopLevelCommands count: {provider?.TopLevelCommands().Length}");
                 ext.Dispose();
             }
         }

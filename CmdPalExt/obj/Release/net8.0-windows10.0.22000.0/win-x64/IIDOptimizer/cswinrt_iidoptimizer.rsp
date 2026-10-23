@@ -1,5 +1,5 @@
 --target
-C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000.0\win-x64\SlinClipCmdPal.dll
+C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000.0\win-x64\ClipHistoryCmdPal.dll
 --outdir
 C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000.0\win-x64\IIDOptimizer\
 --refs 
@@ -11,7 +11,9 @@ C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\Microsoft.VisualBasic.Core.dll
 --refs 
- C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\Microsoft.VisualBasic.dll
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\Microsoft.VisualBasic.dll
+--refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\Microsoft.VisualBasic.Forms.dll
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\Microsoft.Win32.Primitives.dll
 --refs 
@@ -97,6 +99,8 @@ C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\System.Data.dll
 --refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Design.dll
+--refs 
  C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\System.Diagnostics.Contracts.dll
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\System.Diagnostics.Debug.dll
@@ -127,7 +131,9 @@ C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000
 --refs 
  C:\Users\USER\.nuget\packages\system.drawing.common\10.0.13\lib\net8.0\System.Drawing.Common.dll
 --refs 
- C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\System.Drawing.dll
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Drawing.Design.dll
+--refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Drawing.dll
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.NETCore.App.Ref\8.0.13\ref\net8.0\System.Drawing.Primitives.dll
 --refs 
@@ -383,6 +389,14 @@ C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Extensions.dll
 --refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Forms.Design.dll
+--refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Forms.Design.Editors.dll
+--refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Forms.dll
+--refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Forms.Primitives.dll
+--refs 
  C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Input.Manipulations.dll
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\System.Windows.Presentation.dll
@@ -416,5 +430,7 @@ C:\Users\USER\Workspace\Slin-Clip\CmdPalExt\obj\Release\net8.0-windows10.0.22000
  C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\UIAutomationTypes.dll
 --refs 
  C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\WindowsBase.dll
+--refs 
+ C:\Users\USER\.dotnet\packs\Microsoft.WindowsDesktop.App.Ref\8.0.13\ref\net8.0\WindowsFormsIntegration.dll
 --refs 
  C:\Users\USER\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.22000.56\lib\net8.0\WinRT.Runtime.dll

@@ -881,9 +881,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\SlinClipCmdPal.csproj",
-      "projectName": "SlinClipCmdPal",
-      "projectPath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\SlinClipCmdPal.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\ClipHistoryCmdPal.csproj",
+      "projectName": "ClipHistoryCmdPal",
+      "projectPath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\ClipHistoryCmdPal.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\USER\\Workspace\\Slin-Clip\\CmdPalExt\\obj\\",
       "projectStyle": "PackageReference",
@@ -958,7 +958,7 @@
           "Microsoft.Windows.SDK.NET.Ref": {
             "privateAssets": "all"
           },
-          "Microsoft.WindowsDesktop.App.WPF": {
+          "Microsoft.WindowsDesktop.App": {
             "privateAssets": "none"
           }
         },

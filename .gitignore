@@ -1,0 +1,23 @@
+## .NET Core / C#
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Publish outputs
+CmdPalExt/publish/
+bin/Release/publish/
+
+## Visual Studio / VS Code
+.vscode/
+.vs/
+*.suo
+*.userprefs
+
+## Windows & Cache
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.log

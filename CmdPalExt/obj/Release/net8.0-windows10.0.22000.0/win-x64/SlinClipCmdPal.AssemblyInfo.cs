@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SlinClipCmdPal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+095b3cb6dd3941d0d21aaf3a5391d5b9eda42fca")]
 [assembly: System.Reflection.AssemblyProductAttribute("SlinClipCmdPal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SlinClipCmdPal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

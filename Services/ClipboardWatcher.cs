@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using SlinClip.Models;
+using Clipboard = System.Windows.Clipboard;
 
 namespace SlinClip.Services;
 
@@ -24,6 +25,7 @@ public class ClipboardWatcher : IDisposable
     private static extern bool RemoveClipboardFormatListener(IntPtr hwnd);
 
     private readonly ThumbnailService _thumbService;
+    private readonly SettingsService? _settingsService;
     private Thread? _staThread;
     private HwndSource? _hwndSource;
     private volatile bool _isDisposed;
@@ -31,9 +33,10 @@ public class ClipboardWatcher : IDisposable
 
     public event Action<ClipItem>? OnClipCaptured;
 
-    public ClipboardWatcher(ThumbnailService thumbService)
+    public ClipboardWatcher(ThumbnailService thumbService, SettingsService? settingsService = null)
     {
         _thumbService = thumbService;
+        _settingsService = settingsService;
         StartListenerThread();
     }
 
@@ -107,20 +110,67 @@ public class ClipboardWatcher : IDisposable
                 {
                     try
                     {
+                        var maxBytes = (_settingsService?.Settings.MaxContentSizeKB ?? 1024) * 1024L;
+
                         if (Clipboard.ContainsText())
                         {
                             var text = Clipboard.GetText();
                             if (!string.IsNullOrWhiteSpace(text))
                             {
-                                captured = ProcessText(text);
+                                var byteCount = Encoding.UTF8.GetByteCount(text);
+                                if (byteCount <= maxBytes)
+                                {
+                                    captured = ProcessText(text);
+                                }
                             }
                         }
                         else if (Clipboard.ContainsImage())
                         {
-                            var img = Clipboard.GetImage();
+                            BitmapSource? img = null;
+
+                            // 1. 优先尝试从剪贴板获取原始 PNG 字节流（某些应用支持并保留真实 Alpha 通道）
+                            try
+                            {
+                                var dataObj = Clipboard.GetDataObject();
+                                if (dataObj != null && dataObj.GetDataPresent("PNG"))
+                                {
+                                    var rawPng = dataObj.GetData("PNG");
+                                    if (rawPng is MemoryStream ms)
+                                    {
+                                        var decoder = BitmapDecoder.Create(ms, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                                        if (decoder.Frames.Count > 0)
+                                        {
+                                            img = decoder.Frames[0];
+                                        }
+                                    }
+                                    else if (rawPng is Stream stream)
+                                    {
+                                        var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                                        if (decoder.Frames.Count > 0)
+                                        {
+                                            img = decoder.Frames[0];
+                                        }
+                                    }
+                                }
+                            }
+                            catch { }
+
+                            // 2. 回退到 WPF Clipboard.GetImage()
+                            if (img == null)
+                            {
+                                img = Clipboard.GetImage();
+                            }
+
                             if (img != null)
                             {
-                                captured = ProcessImage(img);
+                                // 图片按像素估算未经压缩内存占用限制（宽*高*4字节）
+                                long estimatedBytes = (long)img.PixelWidth * img.PixelHeight * 4;
+                                // 允许单张图片内存大小为上限的 4 倍或最大 30MB
+                                long imgMaxBytes = Math.Min(maxBytes * 4, 30 * 1024 * 1024L);
+                                if (estimatedBytes <= imgMaxBytes)
+                                {
+                                    captured = ProcessImage(img);
+                                }
                             }
                         }
                     }
@@ -175,8 +225,8 @@ public class ClipboardWatcher : IDisposable
         return new ClipItem
         {
             Type = ClipType.Image,
-            Content = $"[图片] {width}x{height}",
-            SearchText = $"[image] [图片] {width}x{height}".ToLowerInvariant(),
+            Content = $"{width} × {height}",
+            SearchText = $"[image] [图片] {width}x{height} {width}×{height}".ToLowerInvariant(),
             Hash = hash,
             ImagePath = rawPath,
             ThumbnailPath = thumbPath,
@@ -196,8 +246,21 @@ public class ClipboardWatcher : IDisposable
         {
             try
             {
-                RemoveClipboardFormatListener(_hwndSource.Handle);
-                _hwndSource.Dispose();
+                var disp = _hwndSource.Dispatcher;
+                if (disp != null && !disp.HasShutdownStarted && !disp.HasShutdownFinished)
+                {
+                    disp.Invoke(() =>
+                    {
+                        try
+                        {
+                            RemoveClipboardFormatListener(_hwndSource.Handle);
+                            _hwndSource.RemoveHook(WndProc);
+                            _hwndSource.Dispose();
+                        }
+                        catch { }
+                        disp.InvokeShutdown();
+                    });
+                }
             }
             catch { }
         }

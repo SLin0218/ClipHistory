@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.6.0.schema.json
+
+PackageIdentifier: SLin0218.ClipHistory
+PackageVersion: 1.0.0
+PackageLocale: en-US
+Publisher: SLin0218
+PublisherUrl: https://github.com/SLin0218
+PublisherSupportUrl: https://github.com/SLin0218/ClipHistory/issues
+PackageName: ClipHistory
+PackageUrl: https://github.com/SLin0218/ClipHistory
+License: MIT
+LicenseUrl: https://github.com/SLin0218/ClipHistory/blob/main/LICENSE
+ShortDescription: High-performance clipboard history extension for PowerToys Command Palette.
+Description: |
+  ClipHistory is a lightweight, ultra-fast Windows clipboard history manager extension natively supporting PowerToys Command Palette.
+  Features include rich text and image capture, and sub-millisecond in-memory fuzzy search.
+Moniker: cliphistory
+Tags:
+  - windows-commandpalette-extension
+  - powertoys
+  - powertoys-run
+  - command-palette
+  - clipboard
+  - clipboard-manager
+ReleaseNotesUrl: https://github.com/SLin0218/ClipHistory/releases/tag/v1.0.0
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

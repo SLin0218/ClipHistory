@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.locale.1.6.0.schema.json
+
+PackageIdentifier: SLin0218.ClipHistory
+PackageVersion: 1.0.0
+PackageLocale: zh-CN
+Publisher: SLin0218
+PublisherUrl: https://github.com/SLin0218
+PublisherSupportUrl: https://github.com/SLin0218/ClipHistory/issues
+PackageName: ClipHistory
+PackageUrl: https://github.com/SLin0218/ClipHistory
+License: MIT
+LicenseUrl: https://github.com/SLin0218/ClipHistory/blob/main/LICENSE
+ShortDescription: 适用于 PowerToys Command Palette 的高性能剪贴板历史插件。
+Description: |
+  ClipHistory 是一款轻量、极速的 Windows 剪贴板历史管理插件，原生支持 PowerToys Command Palette。
+  支持图文混合捕获、纯内存毫秒级模糊检索。
+Tags:
+  - windows-commandpalette-extension
+  - powertoys
+  - powertoys-run
+  - command-palette
+  - clipboard
+  - 剪贴板
+  - 剪贴板历史
+ManifestType: locale
+ManifestVersion: 1.6.0
